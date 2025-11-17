@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recuerdos del día que empezó todo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>9/9/2026</h1>
+      <p class="subtitle">Una web creada por Iñuñu para que quede el registro de todo lo que fue este día</p>
+    </header>
+
+    <section class="cards">
+      <button id="openBook" class="card">📖 Leer el libro</button>
+      <button id="openVideo" class="card">🎥 Ver la bitácora (video)</button>
+      <button id="openPoems" class="card">✍️ Poemas</button>
+      <button id="openLetter" class="card">👶 Carta para nuestro hijo</button>
+      <button id="openQuiz" class="card">❓ Quiz de nosotros</button>
+      <button id="openPlaylist" class="card">🎧 Playlist comentada</button>
+	  <button id="openPresentations" class="card">📊 Presentación</button>
+	</section>
+	
+<!-- Barra superior -->
+<div class="topbar">
+  <div class="topbar-content">
+    <img src="logo.png" alt="Logo" class="logo"> <!-- reemplazá logo.png por tu imagen -->
+    <span class="site-name">Recuerdos del día que empezó todo</span>
+  </div>
+</div>
+
+
+	<!-- Book modal -->
+    <div id="bookModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close" data-close="bookModal">✖</button>
+        <div class="book">
+          <div id="bookPage" class="book-page"></div>
+          <div class="book-controls">
+            <button id="prevPage">« Anterior</button>
+            <span id="pageCounter">1 / 23</span>
+            <button id="nextPage">Siguiente »</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video modal -->
+    <div id="videoModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close" data-close="videoModal">✖</button>
+        <div class="video-wrapper">
+          <!-- Pega tu link de YouTube o usa un archivo local -->
+          <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+<!-- Poems modal (PAGINADO) -->
+<div id="poemModal" class="modal hidden">
+  <div class="modal-content">
+    <button class="close" data-close="poemModal">✖</button>
+
+    <div class="poem-wrapper">
+      <!-- Este div queda vacío para que el JS lo llene -->
+      <div id="poemPage" class="poems-list"></div>
+
+      <div class="poem-controls">
+        <button id="prevPoem" class="muted">« Anterior</button>
+        <span id="poemCounter">0 / 0</span>
+        <button id="nextPoem" class="muted">Siguiente »</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Letter modal -->
+    <div id="letterModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close" data-close="letterModal">✖</button>
+        <div id="letterContent" class="letter-content"></div>
+      </div>
+    </div>
+
+    <!-- Quiz modal -->
+    <div id="quizModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close" data-close="quizModal">✖</button>
+        <div class="quiz">
+          <h2 id="quizTitle">Quiz: ¿Cuánto sabés de nosotros?</h2>
+          <div id="quizQuestion" class="quiz-question"></div>
+          <div id="quizOptions" class="quiz-options"></div>
+          <div id="quizResult" class="quiz-result hidden"></div>
+          <div class="quiz-controls">
+            <button id="nextQuestion">Siguiente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Playlist modal -->
+    <div id="playlistModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close" data-close="playlistModal">✖</button>
+        <div id="playlist" class="playlist"></div>
+      </div>
+    </div>
+
+    <!-- Final modal: el pedido -->
+    <div id="proposalModal" class="modal hidden">
+      <div class="modal-content center">
+        <button class="close" data-close="proposalModal">✖</button>
+        <h2>¿Quieres ser mi novia?</h2>
+        <p class="big">¿Querés acompañarme en esto?</p>
+        <div class="proposal-actions">
+          <button id="yesBtn" class="accent">Sí</button>
+          <button id="noBtn" class="muted">Quiero pensarlo</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <small>Te amo con todo mi corazón</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
