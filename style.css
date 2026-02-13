@@ -11,10 +11,9 @@
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
 body{
   background:linear-gradient(180deg,#071021 0%, #0b1220 100%);
+  justify-content: center;
   color:var(--text);
   display:flex;
-  align-items:center;
-  justify-content:center;
   padding:24px
 }
 
@@ -60,20 +59,32 @@ footer{
 .proposal-trigger{display:flex;gap:8px}
 
 /* Botones generales */
-button{
-  background:white !important;
-  color:black !important;
-  border:2px solid black !important;
-  border-radius:10px !important;
-  padding:12px 20px !important;
-  font-size:17px !important;
-  cursor:pointer;
-  transition:0.2s ease;
+button {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espacio entre icono y texto */
+  background: linear-gradient(135deg, #ff6b6b, #fdbb2d);
+  color: white;
+  border: none;
+  border-radius: 999px; /* pill shape */
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-button:hover{
-  background:#f2f2f2 !important;
+button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
 }
+
+button:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 
 .accent,
 .muted{
@@ -120,6 +131,11 @@ button:hover{
 }
 
 /* Book */
+
+#bookModal .modal-content {
+  margin-top: 80px; /* bajá el modal del libro */
+}
+
 .book{
   display:flex;
   flex-direction:column;
@@ -164,19 +180,19 @@ button:hover{
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  max-height: 80vh;
+  max-height: 60vh;
   overflow-y: auto;
-  padding: 12px;
+  padding: 0px;
 }
 
 /* Cada poema */
 .poems-list .poem {
   width: 100%;
-  max-width: 680px;
+  max-width: 500px;
   background: white;
   color: black;
-  border-radius: 12px;
-  padding: 24px 20px;
+  border-radius: 0px;
+  padding: 0px 20px;
   box-sizing: border-box;
   text-align: center;
   font-family: 'Playfair Display', serif;
@@ -190,7 +206,7 @@ button:hover{
 .poems-list .poem h3 {
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 0px;
   text-align: center;
   color: #222;
 }
@@ -199,8 +215,8 @@ button:hover{
 .poems-list .poem pre {
   margin: 0;
   font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  line-height: 1.8;
+  font-size: 1.15rem;
+  line-height: 1.0;
   white-space: pre-wrap;
   text-align: center;
   background: transparent;
@@ -290,17 +306,25 @@ button:hover{
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; font-family: 'Inter', system-ui, sans-serif; }
 
-/* Fondo animado */
 body {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  /* opcional: evita que el body sea flex si te causa reflows */
+}
+
+/* Fondo persistente e independiente del DOM */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -9999;
   background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  animation: gradientBG 60s linear infinite;
+  pointer-events: none;
 }
+
 
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
@@ -420,24 +444,868 @@ footer {
   background: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   z-index: 100;
+  height: 90px; /* ✅ altura más grande */
+  display: flex;
+  align-items: center;
+}
+
+/* Contenido dentro de la barra */
+.topbar-content {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 24px; /* más aire a los lados */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo */
+.topbar .logo {
+  height: 60px; /* ✅ más grande */
+  width: auto;
+}
+
+/* Nombre del sitio */
+.site-name {
+  font-size: 28px; /* ✅ más grande */
+  font-weight: 700;
+  color: #111;
+}
+
+/* Barra superior con logo y nombre */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 100;
+  display: flex;
+  align-items: center;
 }
 
 .topbar-content {
   max-width: 920px;
   margin: 0 auto;
-  padding: 12px 20px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.topbar .logo {
-  height: 40px;
+.logo {
+  height: 50px;
   width: auto;
 }
 
 .site-name {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   color: #111;
 }
+
+/* Barra de navegación */
+.navbar {
+  position: fixed;
+  top: 70px; /* debajo de la topbar */
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-content {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: var(--accent);
+}
+
+/* Ajuste para que el contenido no quede tapado */
+body {
+  padding-top: 140px; /* 80 + 60 = espacio para ambas barras */
+}
+
+#galeria { margin-top: 0px; }
+.gallery-container { margin: 140px auto 60px; } /* ya está bien */
+
+
+.gallery-section {
+  padding: 60px 24px;
+  background: white;
+  border-radius: 16px;
+  margin-top: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.pantalla {
+  display: none;
+}
+
+.pantalla.active {
+  display: block;
+}
+.gallery-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 24px;
+  max-width: 920px;
+  margin: 40px auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.gallery-container h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #111;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px; /* espacio sutil entre fotos */
+  padding: 0 12px; /* margen lateral igual al gap */
+}
+
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.03);
+}
+
+/* Contenedor general de la galería */
+.gallery-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 24px;
+  max-width: 1000px;
+  margin: 140px auto 60px; /* margen superior para no quedar tapado */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Título */
+.gallery-container h2 {
+  font-size: 28px;
+  margin-bottom: 32px;
+  color: #111;
+}
+
+/* Grilla de fotos */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 0 12px;
+}
+
+/* Cada foto dentro de su caja */
+.photo-box {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.photo-box:hover {
+  transform: scale(1.02);
+}
+
+
+/* Imagen dentro de la caja */
+.photo-box img {
+  width: 100%;
+  height: auto;   /* deja que la altura se ajuste naturalmente */
+  object-fit: contain; /* muestra la foto completa sin recortar */
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 0 12px;
+}
+
+/* Foto horizontal: más ancha */
+.photo-box.horizontal {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+
+/* Foto vertical: más alta */
+.photo-box.vertical {
+  grid-column: span 1;
+  aspect-ratio: 3 / 4;
+}
+
+/* Imagen dentro del contenedor */
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.final-message {
+  font-size: 1.6rem;   /* más grande */
+  font-weight: bold;
+  color: #111;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Contenedor general de la playlist */
+.playlist {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 16px;
+  color: #111;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cada ítem de la playlist */
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.playlist-item:hover {
+  transform: translateY(-3px);
+  background: #f0f0f0;
+}
+
+/* Imagen/cover de la canción */
+.playlist-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Texto de la canción */
+.playlist-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-info .title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.playlist-info .artist {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Contenedor general de la playlist */
+.playlist {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 16px;
+  color: #111;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* espacio entre canciones */
+}
+
+/* Cada ítem dentro de la playlist (usa los divs o p que ya tengas) */
+.playlist > * {
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, background 0.2s ease;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Hover para dar efecto */
+.playlist > *:hover {
+  transform: translateY(-3px);
+  background: #f0f0f0;
+}
+
+/* Ítem de la playlist con botón a la derecha */
+.playlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* separa info a la izquierda y botón a la derecha */
+  gap: 14px;
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.playlist-item:hover {
+  transform: translateY(-3px);
+  background: #f0f0f0;
+}
+
+/* Botón de play */
+.play-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.play-btn:hover {
+  background: #ff4c4c;
+  transform: scale(1.1);
+}
+
+.play-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.play-icon {
+  width: 28px;           /* antes 36px */
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); /* más sutil */
+}
+
+.song-header {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px; /* antes 4px */
+}
+
+.song-header .title {
+  color: #111;
+}
+
+.song-header .artist {
+  color: #555;
+  margin-left: 4px; /* pegado al título */
+}
+
+.comment {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0; /* antes 16px */
+}
+
+body {
+  padding-top: 140px; /* espacio para topbar (70px) + navbar (60px) + un poco extra */
+}
+
+.calendar-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 24px;
+  max-width: 920px;
+  margin: 100px auto 40px; /* 👈 margen superior de 500px, auto a los lados, 40px abajo */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+  overflow: visible;
+}
+
+
+
+
+
+.calendar-container h2 {
+  font-size: 28px;
+  margin-bottom: 32px;
+  color: #111;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.calendar-item {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.calendar-item:hover {
+  transform: scale(1.02);
+  background: #f0f0f0;
+}
+
+.calendar-item .date {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.calendar-item .description {
+  font-size: 0.95rem;
+  color: #555;
+}
+#presentationModal .modal-content {
+  background: rgba(255,255,255,0.95);
+  padding: 24px;
+  border-radius: 18px;
+  width: 95%;
+  height: 75vh;
+  max-width: 1200px;
+  position: relative;
+  color: #111;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column; /* ✅ apila imagen y controles */
+}
+
+.slide-container {
+  flex: 1; /* ✅ ocupa todo el espacio disponible menos los controles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: none;
+}
+
+.slide-container img.active {
+  display: block;
+}
+
+.slide-controls {
+  height: 50px; /* ✅ espacio fijo para los botones y contador */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+#slideCounter {
+  background: white;          /* mismo fondo que los botones */
+  border: 2px solid black;    /* mismo borde */
+  border-radius: 8px;         /* esquinas redondeadas */
+  padding: 6px 12px;          /* espacio interno */
+  font-weight: 600;
+}
+
+.likes-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 24px;
+  max-width: 920px;
+  margin: 40px auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.likes-container h2 {
+  font-size: 28px;
+  margin-bottom: 32px;
+  color: #111;
+}
+
+.likes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.like-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.like-item:hover {
+  transform: scale(1.02);
+}
+
+.like-item img {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.like-description {
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Estado inicial del modal (oculto) */
+.modal {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95); /* se ve más natural que solo scale */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none; /* evita clics cuando está oculto */
+}
+
+/* Estado visible del modal */
+.modal:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Animación del contenido interior */
+.modal-content {
+  animation: modalContentFade 0.5s ease;
+}
+
+@keyframes modalContentFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Que el modal siempre esté por encima de la topbar/navbar */
+.modal {
+  z-index: 200; /* más alto que 100 de la topbar */
+}
+
+/* Contenido del modal de imagen */
+.image-modal-content {
+  width: 95%;
+  max-width: 1100px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-viewer {
+  flex: 1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#imageModalImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.image-controls {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.image-controls .spacer { flex: 1; }
+
+.poem-controls {
+  display: flex;
+  justify-content: center;   /* ✅ centra horizontalmente los botones y el contador */
+  align-items: center;       /* ✅ los alinea verticalmente */
+  gap: 12px;                 /* espacio entre botones y contador */
+  margin-top: 12px;
+}
+/* Controles del libro */
+.book-controls {
+  display: flex;
+  flex-wrap: wrap;          /* permite que salten de línea si no entra */
+  justify-content: center;  /* centra todo */
+  align-items: center;
+  gap: 12px;                /* espacio entre elementos */
+  margin-top: 12px;
+}
+
+/* Input para salto de página */
+#pageJump {
+  width: 80px;
+  padding: 6px 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* Botón Ir */
+#goPage {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#goPage:hover {
+  background: #ff4c4c;
+}
+
+.topbar-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* saca el subrayado */
+  color: inherit;        /* usa el color del texto normal */
+}
+
+.topbar-link .site-name {
+  margin-left: 8px;      /* espacio entre logo y texto */
+  font-weight: bold;     /* que se vea firme */
+  font-size: 1.2rem;     /* tamaño agradable */
+}
+/* 📱 Versión móvil */
+@media (max-width: 768px) {
+  body {
+    padding: 12px;              /* menos margen */
+    padding-top: 120px;         /* espacio para topbar + navbar más chico */
+  }
+
+  .container {
+    max-width: 100%;            /* ocupa todo el ancho */
+    padding: 0 12px;
+  }
+
+  /* Topbar */
+  .topbar {
+    height: 60px;               /* más baja */
+  }
+  .topbar .logo {
+    height: 40px;               /* logo más chico */
+  }
+  .site-name {
+    font-size: 20px;            /* texto más chico */
+  }
+
+  /* Navbar */
+  .navbar {
+    height: auto;               /* deja que crezca */
+    padding: 8px 0;
+  }
+  .nav-links {
+    flex-direction: column;     /* menú vertical */
+    gap: 12px;
+  }
+  .nav-links li a {
+    font-size: 18px;
+    text-align: center;
+    display: block;
+  }
+
+  /* Header */
+  .header h1 {
+    font-size: 24px;
+  }
+  .subtitle {
+    font-size: 14px;
+  }
+
+  /* Cards */
+  .cards {
+    flex-direction: column;     /* botones uno debajo del otro */
+    gap: 12px;
+  }
+  .card {
+    min-width: auto;
+    width: 100%;                /* ocupan todo el ancho */
+    font-size: 16px;
+  }
+
+  /* Modals */
+  .modal-content {
+    width: 95%;
+    max-height: 80vh;
+    padding: 16px;
+  }
+  .book-page,
+  .letter-content,
+  .poems-list {
+    max-height: 50vh;           /* menos alto en móviles */
+  }
+
+  /* Galería */
+  .gallery-grid {
+    grid-template-columns: 1fr; /* una sola columna */
+  }
+
+  /* Calendario */
+  .calendar-grid {
+    grid-template-columns: 1fr; /* una sola columna */
+  }
+
+  /* Cosas que me gustan */
+.likes-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 24px;
+  max-width: 920px;
+  margin: 100px auto 60px; /* 👈 2500px arriba, auto a los lados, 60px abajo */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.likes-container h2 {
+  font-size: 28px;
+  margin-bottom: 32px; /* 👈 solo espacio debajo del título */
+  color: #111;
+}
+
+
+.likes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.like-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.like-item:hover {
+  transform: scale(1.02);
+}
+
+.like-item img {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.like-description {
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+
+  /* Playlist */
+  .playlist-item {
+    flex-direction: column;     /* portada arriba, texto abajo */
+    align-items: center;
+    text-align: center;
+  }
+  .playlist-item img {
+    width: 50px;
+    height: 50px;
+  }
+/* 📱 Ajustes móviles específicos */
+@media (max-width: 768px) {
+  /* Galería */
+  #galeria {
+    margin-top: 500px; /* mucho más chico en móviles */
+  }
+  .gallery-container {
+    margin: 20px auto; /* margen superior e inferior más compacto */
+    padding: 20px 12px; /* menos padding lateral */
+  }
+
+  /* Calendario */
+  .calendar-container {
+    margin: 20px auto; /* margen superior reducido */
+    padding: 20px 12px;
+  }
+
+  /* Ajustes generales de títulos */
+  .gallery-container h2,
+  .calendar-container h2 {
+    font-size: 22px; /* títulos más pequeños en móviles */
+    margin-bottom: 16px;
+  }
+}}

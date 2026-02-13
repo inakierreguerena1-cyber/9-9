@@ -1,3 +1,34 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // Al abrir la página, siempre mostrar inicio
+  window.location.hash = "inicio";
+
+  // Ocultar todas las pantallas
+  document.querySelectorAll(".pantalla").forEach(sec => sec.classList.remove("active"));
+
+  // Mostrar inicio
+  const inicio = document.getElementById("inicio");
+  if (inicio) inicio.classList.add("active");
+
+  // Lógica de navegación para los enlaces
+  document.querySelectorAll("a[href^='#']").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href").substring(1);
+
+      // Ocultar todas las pantallas
+      document.querySelectorAll(".pantalla").forEach(sec => sec.classList.remove("active"));
+
+      // Mostrar la pantalla seleccionada
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.classList.add("active");
+        window.location.hash = targetId;
+      }
+    });
+  });
+});
+ 
+
 // app.js - versión paginada de poemas + lógica robusta (reemplazar todo el archivo actual)
 
 /* =========================
@@ -8,7 +39,7 @@
 const bookPages = [
   "Me devolviste las ganas. Y no digo las ganas de vivir, porque no quiero cargar en vos el peso de una persona suicida. Porque no quiero que entiendas y des por hecho que dependo de vos para estar vivo. Pero sí, me devolviste las ganas. Las ganas de despertarme cada mañana. Las ganas de amar. Las ganas de mirar a los ojos a mi mamá, porque ya no me da miedo que vea lágrimas, ya que ve felicidad en cada gesto de mi cara. Me devolviste las ganas de sonreír, de crecer, de seguir insistiendo. Me devolviste las ganas de mejorar. Y eso lo valoro, lo valoro muchísimo. Porque lo que causaste, causas y vas a causar en mí no es algo que se tenga que pasar por alto. Tu existencia genera en mí una motivación tal que me incita a ser feliz cuando hasta hace un tiempo quería que todo se acabe. Hoy, veo la vida con otro color.\n\nY qué locura es el tiempo. Hace dieciocho años empezaron mis primeros traumas, hace trece años me sumí en la absoluta tristeza, hace ocho años pensé en el suicidio por primera vez, hace cinco años empecé a caer en depresión y hace cuatro meses me la diagnosticaron. Hace dos meses no hablaba con vos, lo único que sabías de mí era mi nombre. Hoy, la vida vuelve a tomar sentido gracias a vos, porque me hiciste creer que no está todo perdido, que aún existen personas empáticas, que no me tengo que conformar con risas, sino que las relaciones sociales están hechas de esto, de reciprocidad absoluta. Me acostumbré a dar, a sanar heridas ajenas y, por fin, alguien se paró un segundo a pensar en cómo la estaba pasando yo. Y lo que más me gusta es tu modus operandi; en vez de taponar mis tristezas momentáneamente con dopamina, en vez de barrer la basura bajo la alfombra, agarraste mis traumas y me los hiciste pensar y repensar, me convenciste de cambiar mi mindset, agarraste mis inseguridades y con acciones las hiciste desaparecer. No estás taponando las tristezas de un hombre depresivo, estás dándole motivos a ese hombre para que esas tristezas dejen de existir. Y no, obviamente que no es solo mérito tuyo, obviamente que yo también tengo mucho que ver, pero no hubiera podido hacer nada de esto sin vos.\n\nClaro está que aunque siempre me hayas parecido linda, graciosa e inteligente, en un principio ni me imaginaba que se concrete algo así entre vos y yo. Pensé que simplemente ibas a ser mi crush mientras vos seguías feliz en tu pareja, pero decidiste jugártela por mí. Tengo grabada en mi cabeza nuestra primera interacción en persona, esa vez que me llamaste al grito dulce de ‘Iñuñu’, buscando complicidad y confianza en una persona que no conocías y que, en su peor momento de ánimo, sonrió por una sola palabra que salió de tu boca. Ciertamente, creo que guardo en mi memoria todos los momentos y conversaciones que viví con vos, aunque mi capacidad de retener información se va deteriorando poco a poco. Me acuerdo de la primera vez que vi tu sonrisa, y la primera vez que intentaste entablar una conversación conmigo en la casa de Moya. Me acuerdo la primera vez que nos quedamos solos en Discord, jugando al Dress To Impress. Me acuerdo la primera vez que nos juntamos a solas, por tu cumpleaños. Me acuerdo la primera vez que viniste a mi casa. Y sí, parece que solo hablo de la primera vez, obviamente las primeras veces son importantes, pero qué alucinante el hecho de que también me acuerdo la segunda vez que te vi, la tercera vez que hicimos llamada a solas, la cuarta vez que me abrazaste y la quinta vez que me dijiste ‘te amo’. Amo cada momento con vos, amo tu existencia, amo tu amor.",
   "Y qué inverosímil fue ese día, o esos días, o estos días, porque sigo sin creérmelo. Qué éxtasis de emociones en la que se transformó mi cerebro desde ese caluroso viernes que me dijiste que me amabas después del cumpleaños de Mac. Qué taquicardia me dio al votar ‘te doy’ en esa historia, cómo se me alteró el biorritmo al preguntarte si podía ir a tu casa en San Vicente para estar a solas. Qué nervioso me puse cuando te abracé por primera vez, qué miedo me dio hacerte mimos en la pierna. Pero valió la pena, claro que valió la pena. Fui para adelante con miedo, porque por primera vez encontré a una persona con la que no me paralizase ante situaciones tales, porque vos me diste la paz que necesitaba para dar un paso más en todo momento.\n\nEse jueves, en el que nos encontramos con un estado de triggereo total de mi parte, lograste bajarme las ansias y la tristeza hasta el subsuelo. Y poco a poco, fuiste llenando mi corazón del amor más puro. Acostados, mi corazón latía por lo menos un 50% más de lo normal. Mi mano acariciaba tu muslo y yo no podía pensar, solo sentir. Capaz empecé a confirmar que sentías algo por mí cuando escuchabas a tus papás subiendo las escaleras y, automáticamente, te alejabas de mí. Ahí se hizo evidente, algo raro había. Y sí, raro para mí que no estoy acostumbrado a ser amado, raro porque no sé lo que es ser tratado así. No fue solo raro, fue hermoso. Esa noche se terminó de gestar el amor más lindo de todos. Cuando trenzamos nuestras piernas durante la cena y Emilia cantaba de fondo al son de ‘te toco en secreto bajo la mesa’ continuó forjándose la mística más linda de todas.\n\nPorque sí. Si hay algo que caracterizó esta relación desde su concepción es que, cierto o no, nosotros estamos convencidos de que la mística está. Fuimos enumerando miles de coincidencias en el camino pero yo no me quedo con que nuestros padres se conocieran desde hace años, o con que ya había estado en la casa de Juan Mac Garva antes de que vos llegues a mi vida. Para mí, la coincidencia más linda de todas es que el universo me haya mandado a una persona con consciencia en salud mental cuando yo me negaba a entender que se podía ser saludable mentalmente. Porque como un regalo divino, llegaste para alegrarme con tus chistes y tus charlas, pero también hurgaste en lo más profundo de mi psiquis para sacar a flote conmigo una guerra que sentía perdida. Y es como te dijo Moya, yo seguía mejorando al abrirme socialmente con todos, pero nunca se vio una mejoría tan acelerada como cuando empecé a hablar con vos. Y esa, exactamente esa, es la coincidencia que más valoro entre nosotros.\n\nPero también nos complementamos, porque hay situaciones que son muy distintas entre nosotros. Yo venía de cinco años de absoluta soledad, vos venías de cinco años de absoluta compañía. El amor para nosotros dos tenía distintos significados. Para vos era una realidad, algo casi tangible porque estabas acostumbrada a su presencia. Entendías al amor como algo cotidiano. Yo no, para mí el amor se había reducido a una palabra de cuatro letras, como bien lo definió mi tía bisabuela hace ya muchos años. Y los dos nos la jugamos, los dos lo hicimos por el amor y confianza que nos transmitimos. Vos dejaste todo por mí, dejaste una relación de años, dejaste una casa. Yo dejé mis convicciones, porque hasta hace unos meses estaba seguro de que nunca iba a volver a amar pero vi algo tan distinto en vos, algo que no había sentido con nadie. Encontré un nivel de conexión tal con tu persona que se me derrumbaron todos los pensamientos pesimistas que tenía sobre el acto de amar. Tenía miedo, tenía muchísimo miedo de amar, pero lo hice igual. Tenía miedo de salir lastimado, tenía miedo de lastimar. Me daba pánico pensar en el hecho de cargar a una persona con mis pensamientos depresivos y que no sea capaz de alejarse de mí en caso de que lo necesitara, tal como se lo dije a mi psicóloga. Y fueron tantos los años en los que esa idea se fue formando en mi mente, que llegué al punto de creerme asexual, dejé de ver a las demás personas con intenciones amorosas para siempre, me encerré en mí mismo, en dedicarle el amor a mis pasiones, pero nunca me llenó eso. Yo no extrañaba el contacto físico, no extrañaba los besos, o al menos eso pensaba hasta que te conocí a vos. No voy a mentir, no los extrañaba, pero en el preciso momento en el que nos dimos nuestro primer beso, me di cuenta de cuánto necesitaba sentir algo así. Se me revolvió el estómago, las mariposas enloquecieron. Yo creo que ahí se consumó todo, en ese preciso momento en el que se concretó nuestro primer beso, dejé de prohibirme el enamorarme. Tenía mucho miedo de enamorarme y que no sea correspondido, y lo más lógico para mí era que no lo fuese. Pero en ese preciso momento, me permití amar. Me permití amar como nunca lo había hecho. Le mandé una señal directa a mi corazón para que lata más rápido cada vez que viera tu sonrisa, le confirmé a mis manos que podían añorar tu piel y le dije a mis labios que esa no iba a ser la última vez que sientan esa hermosa textura en los labios de Mía Rodríguez.",
-  "Y fue muy difícil no empezar a saltar en una pata de la emoción en ese momento. La chica linda, inteligente, buena y graciosa me estaba dando bola. Una idea que había empezado a gestarse en mi cabeza mucho tiempo antes, pero que elegí descartar su posible concreción para no ilusionarme.\n\nMe fascina que sepas contenerme, porque nunca había encontrado a alguien que pueda hacerlo con tanta facilidad. Yo tengo mis propias formas de calmarme, la psicóloga me da herramientas, y no te tenés que preocupar porque dependa de vos para poder tranquilizarme en mis momentos de ansiedad, pero vos lo hacés ver tan fácil. Tus mensajes me transmiten calma, porque siempre intentás que vea las cosas con ojos más optimistas, aunque sé lo difícil que es para vos tomar tu propio consejo. Cuando me contenés por llamada, no solo intentás tranquilizarme, sino que también me halagás y me hacés sentir tranquilo con la voz más dulce que escuché en toda mi vida. Y en persona ni hablar, siempre estás atenta a que no me tiemble la pierna o a que no suspire mucho. Me agarrás la mano, me pisás el pie o me presionás la rodilla, me abrazás y me besás. Lográs que todo se calme con un par de mimos.\n\nMe fascina que seas buena persona, que siempre estés pendiente del bienestar de los demás. Y si sentís culpa por tus acciones, en vez de intentar contextualizar y excusarte, es porque no podés dejar de pensar en que los demás estén bien. Así como hacés todo para contenerme en mis peores momentos, siempre estás ahí para ayudar y aconsejar a todos tus amigos y seres queridos. Les das segundas oportunidades a los que te fallan y sos muy consciente de que todos atraviesan sus propias batallas en el día a día. Admiro tu empatía y me gusta que me la contagies. Aprendo mucho de vos.\n\nY me vuelve loco que seas inteligente, que sepas resolver situaciones complejas. A veces lográs sacar conclusiones que nunca se me hubieran ocurrido ante momentos de la vida cotidiana. Lográs ver los hilos detrás de conversaciones que a mí se me hacen normales. Porque claro, no te tenés que quedar solamente con las notas, con tu habilidad para estudiar o que te hayas tragado Carrie o Coraline. No solo sos hábil con la memoria a corto plazo o se te da bien la lectura, sos inteligente en la vida cotidiana. Tenés inteligencia emocional, inteligencia racional, inteligencia social, inteligencia creativa e inteligencia cinestésica.",
+  "Y fue muy difícil no empezar a saltar en una pata de la emoción en ese momento. La chica linda, inteligente, buena y graciosa me estaba dando bola. Una idea que había empezado a gestarse en mi cabeza mucho tiempo antes, pero que elegí descartar su posible concreción para no ilusionarme.\n\nMe fascina que sepas contenerme, porque nunca había encontrado a alguien que pueda hacerlo con tanta facilidad. Yo tengo mis propias formas de calmarme, la psicóloga me da herramientas, y no te tenés que preocupar porque dependa de vos para poder tranquilizarme en mis momentos de ansiedad, pero vos lo hacés ver tan fácil. Tus mensajes me transmiten calma, porque siempre intentás que vea las cosas con ojos más optimistas, aunque sé lo difícil que es para vos tomar tu propio consejo. Cuando me contenés por llamada, no solo intentás tranquilizarme, sino que también me halagás y me hacés sentir tranquilo con la voz más dulce que escuché en toda mi vida. Y en persona ni hablar, siempre estás atenta a que no me tiemble la pierna o a que no suspire mucho. Me agarrás la mano, me pisás el pie o me presionás la rodilla, me abrazás y me besás. Lográs que todo se calme con un par de mimos.\n\nMe fascina que seas buena persona, que siempre estés pendiente del bienestar de los demás. Y si sentís culpa por tus acciones, en vez de intentar contextualizar y excusarte, es porque no podés dejar de pensar en que los demás estén bien. Así como hacés todo para contenerme en mis peores momentos, siempre estás ahí para ayudar y aconsejar a todos tus amigos y seres queridos. Les das segundas oportunidades a los que te fallan y sos muy consciente de que todos atraviesan sus propias batallas en el día a día. Admiro tu empatía y me gusta que me la contagies. Aprendo mucho de vos.\n\nY me vuelve loco que seas inteligente, que sepas resolver situaciones complejas. A veces lográs sacar conclusiones que nunca se me hubieran ocurrido ante momentos de la vida cotidiana. Lográs ver los hilos detrás de conversaciones que a mí se me hacen normales. Porque claro, no te tenés que quedar solamente con las notas, con tu habilidad para estudiar o que te hayas tragado Carrie o Coraline. No solo sos hábil con la memoria a corto plazo o se te da bien la lectura, sos inteligente en la vida cotidiana. Tenés inteligencia emocional, inteligencia racional, inteligencia social, inteligencia creativa e inteligencia cinestésica",
   "Y además de todo, también te das el lujo de ser la persona más graciosa que haya conocido en mi vida. Lográs hacerme reír solamente con gestos, que es algo más que complejo. Siempre estás rápida con los chistes y tenés todo un almacenamiento interno de lores para que los remates sean perfectos. Y encima nos reímos de las mismas pelotudeces, también me llena el poder hacerte reír, el parecerte gracioso y ocurrente. Porque no es solo lo que me gusta de vos, también me gusta que te gusten cosas mías. Estaba muy negado a creer que alguien iba a poder destacar algo de mí. De hecho, en julio la psicóloga me pidió que las personas de mi círculo cercano destaquen cosas buenas de mí porque yo no lograba hacerlo. Y vos me las remarcás siempre, me elevás la autoestima aunque vos no hayas sido la culpable de que yo la tenga tres metros bajo tierra.\n\nNo hay nada más lindo que el poder hablar con vos indefinidamente, que el 100% de nuestras conversaciones fluyan. Que podamos estar en Discord durante 15 horas seguidas y que no haya ni un minuto de aburrimiento, que nunca se me cruce por la cabeza la idea de irme a hacer otra cosa, porque justo ahí es donde quiero estar. Y no es solo por la situación amorosa que estamos viviendo, porque cuando yo era feliz con tu amistad esa confianza y conexión ya estaba. Ligado a eso está el hecho de que siempre que pasa algo malo, siempre que algo no nos gusta, podemos hablarlo y resolverlo, que podemos dar nuestros puntos de vista sin discutir ni enojarnos, que somos sanos para resolver esas situaciones y que siempre buscamos ponernos en el lugar del otro.\n\nTe agradezco por mostrarme tu mundo, porque me dejes conocer tus gustos y porque me hayas enseñado tantas cosas de tu pasado para llegar a un punto tal en el que creo que te conozco de toda la vida. Conozco todas tus etapas porque vos me permitiste hacerlo. Estoy dispuesto a comer pastel de papa con vos todas las veces que quieras, que me enseñes a hacerlo exactamente cómo te gusta a vos para poder replicarlo siempre que no sepa como demostrarte el amor que siento. Estoy listo para que veamos Coraline en loop, la versión extendida, el making of, videos de curiosidades y que vayamos al cine cuando la reestrenen por los veinte o los treinta años. Me entusiasma el hecho de escuchar toda la discografía de One Direction en bucle, menos Made in the A. M., porque eso no es One Direction. Muero de ganas de ir a ver a Emilia con vos, de que toquemos la guitarra juntos, de ser al primero que le cuentes la temática de tus cumpleaños, de que veamos juntos Kimetsu, Arcane y la primera temporada de American Horror Story, que escuchemos la playlist de covers de Koino Yokan mientras tomamos una Powerade roja o mientras comemos unos chupetines Pop Extreme azules\n\nHoy una persona depresiva está proyectando estas y miles de cosas más con vos, algunas que implican resultados más trascendentales. Mientras anhelo casarme con vos, me es inevitable mirar para atrás y ver las nulas ganas de existir que tenía hasta hace poco. Una de las cosas que planteé en mi primera sesión de terapia fue que no tenía ni me interesaban los planes a futuro y hoy, meses después, me voy a dormir con el sueño de irme a New York con vos para pasar navidad.\n\nMe hipnotiza tu risa y me muero de ternura cuando te masajeas los cachetes porque te duele sonreír tanto. Amo poder causar eso en una persona que amo tanto. Me encanta que te tapes la cara porque te da vergüenza que te vea riendo, porque un poco delata que estás enamorada de mí al lograr que mi mirada te intimide. Pero te quiero pedir que ya no lo hagas, que me dejes ver cómo te brillan los ojitos en tus sonrisas, cómo gesticulás mucho con la boca y como se forman unos mini hoyuelos. Dejame disfrutar esas sonrisas, que son un cachetazo de ternura que me cambian el día. Ya no necesito recurrir a películas, realities o videos de YouTube, ya que una charla con vos me da todo el entretenimiento que necesito para sonreir hasta el hartazgo.",
   "Este es solo el inicio de la que estoy convencido que va a ser la relación de mi vida y lo estoy disfrutando cada día, cada hora, cada minuto. Amo pensar en vos desde que me despierto hasta que me duermo. Me encanta que mi primer pensamiento al despertar sea desearte un buen día y preguntarte cómo dormiste. Me hace feliz dormirme en llamada, siendo tu respiración adormecida lo último que escucho antes de terminar el día, sin importar si fue uno lindo o uno triste. No quiero dejar de disfrutar todo esto y, a veces, el sobrepensar me lleva a encontrarle matices inexistentes a una relación que me da todo lo que necesito para ser feliz. Estoy convencido de que pronto dejaré de sobreanalizar todo lo que pasa entre vos y yo, porque la felicidad es tal que me lleva a darme cuenta que el futuro será alegre y tal como lo sueño. Si pienso todo esto es gracias a la confianza que me transmitís en el día a día. No estás callando mi mente, estás aniquilando los pensamientos negativos y reemplazandolos con sueños y risas a través del amor más puro que alguna vez recibí.\n\nDejé de ser consciente de muchas cosas. No sé si eso está bien o está mal, pero elijo no juzgar que el amor me ciegue. La verdad es que el frío y el calor ya me generan indiferencia. Preocupaciones pelotudas como que se me corte la luz, o no tener agua por unas horas, ya no me preocupan. La vida me empezó sonreír porque yo mismo dejé que esboce esa sonrisa. Mi mente está dejando de ver lo que me falta y elige quedarse con lo tengo. Y hoy, después de mucho tiempo creyendo que no iba a tener amor, ahí lo tengo. Y está todo envasado en una pelirroja de 155 centímetros que me hace reír cuando pensé que mi cuerpo ya no era capaz de hacerlo. El amor se me rebalsa por los poros, y no me da vergüenza. Amo que me vean enamorado porque no es algo normal en mí. Mis papás y mi hermana se mueren de amor con toda esta situación; se los conté a los tres por separado y las tres veces exclamé “estoy completamente enamorado” mientras gesticulaba alegría con cada músculo facial.\n\nMi mente se altera por completo cuando estoy con vos, porque no sé cómo digerir este sentimiento único que estoy atravesando y me encanta saber que nunca voy a aprender a hacerlo. Porque todos los días me sorprendo un poco más con la cantidad de cosas que podés generar en mí. Porque desde la primera vez que tuvimos contacto físico me di cuenta que mi corazón latía más rápido al tocarte. Y no es solo eso, porque el cansancio facial que tengo de sonreír tampoco es algo común en mí. Las mariposas que siento en la panza pensé que solamente existían en las canciones o en las películas que veía cuando era chico, pero hoy logro comprender que Ojos Color Sol habla de algo casi literal cuando describe al amor de esa manera. Porque sí, ahora los sueños son reales porque se sueña despierto, ahora la escasez de comida se vuelve deliciosa al tener la barriga llena de mariposas.",
   "Quedo embobado al observarte hablar y creo que ya quedó demostrado varias veces que puedo hacerlo por tiempo indeterminado. Me pierdo en tus rasgos. Me enloquece descubrir las pequitas que vos odias, y analizar cómo combina el arco de tu nariz con tu mirada penetrante que fusiona ternura e incandescencia. Y perdón que sea insistente con un tema que no es acorde al momento de la vida que estamos viviendo, pero cuando te veo hacer gestos que hacías de chica, sigo viendo a esa niña interior e inevitablemente me imagino el formar una familia para que puedas heredarle a nuestros hijos los rasgos más lindos del mundo. Al no conocernos hace mucho tiempo, no creo que seas consciente de lo raro que es que Iñaki Erreguerena esté proyectando el tener una familia, porque hasta hace muy poco me negaba completamente a eso. Hace ya años, mi papá me dijo que tener hijos era arruinarse la vida; y no solamente me cargó el dolor de ser un arrepentimiento para él, sino que me convenció de que nunca iba a tener una familia. Y eso que yo no creo que tener hijos sea arruinarse la vida, pero sí que espero nunca replicar una maldad tan grande como la que él me dijo a mí ese día. Hoy estoy seguro de que no va a ser así, que voy a darle todo mi corazón a esos mini Erreguerena-Rodríguez si es que en algún momento existen y que nunca cargaré en ellos mis propios traumas.\n\nSi tuviera que enumerar la totalidad de cosas que me gustan de vos, creo que nunca acabaría, pero igual suelo intentarlo con estos bosquejos que anhelan convertirse en una declaración de amor. No solo amo las cosas que hacés, sino que amo las maneras en las que existís. Esas nimiedades que me hacen dar cuenta lo bien que elegí a la mujer que amo, esos detalles que me hacen ser consciente de que ir contra mis convicciones fue la mejor decisión.\n\nMe fascina tu postura cuando estás sentada, cómo cruzás las piernas al estarlo o cómo a veces decidís esconderlas debajo de tu propia silla con un pie sobre el otro. Me vuelve loco cómo te frotas los pies cuando estás acostada, también esa tierna manera en la que caminás, cómo movés los brazos al hacerlo, y qué lindo que se ve eso desde unos 20 centímetros más arriba tuyo. Adoro cómo entrecerrás los ojos como sospechando algo, cómo ponés cara de enojada, o cuando me mirás con cara de loca. Me obsesiona cómo se te frunce la punta de la nariz cuando te reís o cuando hablás entusiasmada sobre un tema que te apasiona. Me enternece que cierres los ojos y tires la cabeza para atrás cuando te hago mimos en el cuero cabelludo, o que me agarres la mano para ver la diferencia de tamaño con la tuya. Me gusta cómo agarrás los vasos y la postura que ponés cuando escribís en un pizarrón, sacando pecho y mirando ligeramente para arriba, condicionada por ese metro y medio de puro amor en el que estás embotellada.\n\nY agradezco por todas esas veces en las que ponés tu pierna sobre la mía, esas otras en las que nos trenzamos, o en las que directamente te sentás sobre mí. Me muero de amor cuando buscás estar siempre al lado mío al caminar en grupo o cuando nos sentamos en una mesa. Me cautiva que te inclines hacia mí cuando querés un abrazo, porque no tenés miedo de demostrar que necesitas expresar ese amor que corre por tus venas.\n\nY qué locura que sos físicamente. Con esa piel suave, los ojos que reflejan la luz del sol y toman ese color almendrado que tanto me gusta analizar en tu iris. La característica forma de tu pera que sabe combinar tan bien con tu mandíbula marcada y con ese lunar que tenés en la barbilla. Qué perfección hay en la forma de tu nariz y en el tamaño de tus orejas, así como también en la forma, volumen y temperatura de esos carnosos labios que me conmueven. Amo tu frente y cómo se te plisa al gesticular. Me gustás tanto sin maquillaje pero qué bien que te quedan esos delineados que te hacés. La diferencia de tamaño entre nosotros es bastante grande y, por eso, me despierta ternura que seas tan chiquita y que tu cara pueda caber en mi mano. Qué bien que te vestís, qué lindas te quedan las polleras, las botas o las polainas. Tu pelo es fascinante, tanto lacio como ondulado o en ese punto medio que tanto odiás. Te quedan bien todos los colores y formas que le diste a lo largo de los años. Me gusta con y sin flequillo, natural o teñido, largo o corto, despeinado o con el look techno que te hiciste una vez. Me enamora el tono pálido de tu piel y lo roja que te ponés al hacer ejercicio.",
@@ -30,10 +61,12 @@ const bookPages = [
   "Empecé a verme en vos. Desde un primer momento me vi en vos. Vi mis traumas siendo atravesados por alguien más. Vi mi humor en otra persona. Entendí que no estoy solo, después de años sintiéndome aislado e incomprendido. Me veo en vos, y eso me ayuda a quererme. Noto que hay cosas mías que sí me gustan, cosas que aprecio, porque sé apreciarlas en vos. En vos está todo eso que me falta, pero también está todo eso que tengo y no sé valorar. Me abrís los ojos, me ayudás a quererme.\n\nVoy a hacerte feliz. Todas las mañanas de tu vida vas a amanecer con la consciencia tranquila de que hay una persona que te ama, que te quiere ver bien pase lo que pase. Voy a complacerte ahora, cuando seamos novios, cuando estemos casados. Siempre voy a dar la mejor versión de mí, porque no merecés menos que eso. En cada detalle intentaré demostrar el amor que llevo adentro. En cada palabra intentaré secar tus lágrimas y sacarte una sonrisa. Tu corazón ya no va a latir solo y tus suspiros siempre van a ser escuchados. Estoy dispuesto a pelear por tu bien. No te olvides que estoy acá, siempre estoy acá, siempre voy a estar acá.\n\nCuando estamos juntos, nuestras manos están distanciadas por menos de cinco segundos. Esos cinco segundos, esos quince centímetros recorridos lo son todo. En ese momento, el aire se curva y el tiempo corre más lento mientras busco el roce de tu piel con la yema de mis dedos. Todo comienza a tener sentido en ese momento, me doy cuenta por qué sigo peleando, por qué sigo insistiendo. En esos instantes, el silencio parece susurrar nuestros nombres, el universo emula una sonrisa al ver concretado su más grande plan. El suelo se disfraza de cielo cuando caminamos con las manos apretadas, empiezo a flotar. Me gusta creer que hay magia en todo esto, y estoy convencido de que la hay.\n\nTe escucho cantar, te veo bailar, te admiro mientras estudiás lo que te gusta. Te veo contenta y mi corazón opta por acompañar ese sentimiento. Tu felicidad me contagia. Tu felicidad es la mía. Mi cerebro también lo elige, porque esto también es racional. Me dejo llevar por mis sentimientos, pero premeditando todo, analizando todo. Mi cerebro, mi corazón y la totalidad del cúmulo de átomos que se agrupan para formarme están de acuerdo. Soy feliz con vos.\n\nNo hay día en el que no cierre los ojos y se formen imágenes mentales sobre nuestro futuro. Imagino el próximo beso que te voy a dar, nuestra próxima risa juntos, nuestras primeras vacaciones juntos, nuestra futura convivencia, te imaginé en el altar, te imaginé haciéndole upa a nuestro hijo recién nacido, cantándole canciones de cuna, nos imaginé viendo sus primeros pasos, viendo cómo termina el colegio, nos imaginé en las cenas familiares, nos imaginé conociendo a nuestros nietos, nos imaginé viejitos, siempre con el amor intacto.\n\n¿Me brillarán más los ojos cuando hablo de vos?, yo no los puedo ver pero debe ser así porque hasta la gente de mi entorno que no te conoce te tiene cariño. Sé transmitir una imagen mental muy acorde a lo mucho que te amo, como hasta para que mi psicóloga te tenga cariño y siempre me lo diga. Debe ser muy evidente el enamoramiento que tengo hasta para absolutos desconocidos, porque voy sonriendo en el colectivo mientras hablo con vos, porque agarro el celular entre serie y serie cuando estoy en el gimnasio para contarte lo que estoy haciendo.",
   "Me disculpo de antemano por los tintes que tomarán los siguientes párrafos, pero hay hechos que no se pueden obviar. Como que con cada roce mi piel se enardece, que me conmueve sentir tus lunares, contarlos, memorizar sus posiciones pero también llegar a ese punto de rozar, tocar y penetrar con cada uno de mis sentidos los rincones más íntimos de tu cuerpo. Oler tu calor, escuchar tu sonrisa, tocar tus sentimientos, degustar tus palabras y ver tu corazón. Amo que mis sentidos se alteren, que se fusionen, que se amalgamen mientras pelean por sentir cada uno de los detalles que te componen. Que mis ojos le griten a mis oídos que quieren ver esos susurros, que mis manos le insistan a mi nariz que desean tocar tu dulce aroma.\n\nY es difícil ponerme superficial, intentar hablar solamente de un cuerpo, cuando me refiero a una persona que moviliza todo en mí con sus palabras, con sus sentimientos; pero también me es inevitable recaer en ese tópico cuando observo a esa persona y no puedo evitar que mi alma se arrodille ante su presencia.\n\nQuiero entrar en vos y no salir nunca. Quiero entrar en cada una de las acepciones que tiene esa palabra, quiero que la idea de un futuro conmigo penetre tu cerebro, pero también que mi lengua nunca salga de tu boca. Quiero estimularte, hacerte sentir en el cielo mientras mi saliva recorre tu oreja, desde tu lóbulo hasta tu hélix, humectando lentamente el cartílago. Quiero que el extremo de mi lengua tensada cumpla el deseo exacto que tu cuello posee, o que en una forma más relajada y lenta haga que tu piel se erice. Necesito entrar en vos, en la acepción literal de esa frase, poder satisfacerte en cada posición que decidas, lograr que entre tus muslos florezca un manantial honrando mi nombre, mi presencia. Necesito que el calor del verano quede opacado por el que generan nuestros cuerpos, mientras mi dureza y tu rocío adornan de amor e incandescencia aquella habitación que desee alojarnos. Preciso que las luces rojas sean solo un reflejo visual de lo que pasa por nuestras mentes mientras mi mano acaricia tus milímetros más íntimos con el objetivo de que un goce se genere en tu interior, que olvides las preocupaciones por un rato mientras cada extremidad de mi cuerpo intenta lograr que el tuyo garúe sobre el mío.\n\nY cuando el temblor de tus piernas ceda y ese río corra entre vos y yo, quiero quedarme ahí, sumergido en el eco de tu respiración agitada, en el estridente sonido de tus “shhh”, en tus súplicas para frenar por miedo a no soportar un nuevo intento de desatar el pico más alto de tu excitación. Que el silencio de la habitación nos envuelva mientras nuestros corazones acelerados marcan el ritmo del acto sexual más amoroso que jamás se haya gestado, porque no somos capaces de hacer nada sin amor. Mientras gozamos, nos es inevitable besarnos, acariciarnos, hablarnos dulcemente, porque el amor siempre está presente cuando se trata de nosotros.\n\nMás allá de un beso, una penetración, una lamida; lo que más me abrasa, lo que más me enciende, lo que más me incinera es la idea de pertenecerte, la sensación de que me perteneces. La posibilidad de que por unos segundos, unos minutos, unas horas, todo en mí es tuyo, que todo en vos es mío.",
   "Cuando llega la hora de que amanezca, la hora de que el brillo del Sol seque los rastros de la noche anterior, queda en mi retina la forma en la que tus ojos gritaron mi nombre con pura devoción durante un momento de absoluto disfrute. Y cuando la luz del día termina de secarlos, queda ese lazo invisible que nos une, queda la certeza de haber habitado un mismo lugar en un mismo instante, de habernos fusionado. Queda la huella de habernos pertenecido, y yo quedo con el deseo de que se repita cada vez que el Sol se esconda y permita que el calor del ambiente lo proporcionemos nosotros.\n\nY se repite, siempre se repite. Porque nuestros cuerpos se añoran, se necesitan. Porque tu tacto necesita de mi olfato y mi visión precisa de tu escucha. Siempre volvemos a hacerlo porque el libido se despertó en dos personas que estaban caminando lentamente hacia la nulidad de deseo sexual. Nos encendimos, y nos mantenemos encendidos cada vez que intimamos.\n\nCómo me gusta cuando la ferocidad de este amor nos agarra desprevenidos. Cuando entre charla y risa, el deseo de unirnos se va volviendo más fuerte, y qué bien que nos unimos. La química es indiscutible, nos entendemos sin hablar, e igual nos hablamos. Me gusta estar dentro tuyo, gozar de tus rincones más profundos, mientras en mi cabeza proceso la idea de que lo que está sucediendo no es un sueño, aunque lo parece. Me enciende tu goce, escuchar cómo gozás, notar esos movimientos pélvicos conscientes o inconscientes que delatan lo que sentís. Quiero susurrarte al oído, que el amor entre por tus oídos y por todos los orificios de tu cuerpo. Quiero que tu transpiración sea la respuesta a una noche de incandescencia que guardes por siempre en la memoria, que cada gota de mi saliva que ingieras te ayude a llevarte siempre un recuerdo mío.\n\nY la memoria es un enemigo cruel, porque es difícil seguir con mi día a día habiéndote visto en las posiciones más íntimas. Cuando cierro los ojos se recrean esas imágenes mentales que me llevan de regreso a ese sueño, ese sueño que me cuesta creer que no es un sueño. Mis manos guardan en su memoria esa textura humectada inolvidable, mi cuello lleva las marcas de este amor, mi lengua añora los pliegues de esa oreja y mi cerebro sueña con volver a entrar en vos, con volver a penetrarte con cada una de mis extremidades.\n\nQué éxtasis tenerte, que éxtasis que ese cuerpo sea mío por un rato, qué éxtasis poder hacerte mía. Y yo soy tuyo, porque cada centímetro de mi cuerpo es tuyo, porque todo lo que derramo también es tuyo, porque cada gota de transpiración cuando estoy con vos o cuando yazco a solas en mi cama, también es tuya. Soy tuyo, y vos sos mía. Siempre lo vamos a ser, pero cómo me gusta reforzarlo cuando nuestros cuerpos se unen.",
-
-  // agregá más páginas si querés
+  "Necesito regresar, obtener el foco en medio de este oasis de incandescencia. Y me encuentro acá, pensando de nuevo en nuestra conexión. A veces las lágrimas se vuelven costumbre, a veces el corazón se agrieta. Esta vez no estoy solo, tengo a mi lado a una mujer que da cada gramo de su alma para verme sonreír una vez más. Y gracias por agradecerme por agradecerte. Porque mis sonrisas son agradecimientos, recordatorios de que antes no sonreía. Y cada halago a mis esbozos de felicidad son un agradecimiento de tu parte. Gracias por dejarnos agradecernos.\n\nCada día de mi vida estoy un poco más convencido. Aunque no es convicción, no se trata de eso. Cada día de mi vida soy más consciente de la realidad, sos el amor de mi vida, el amor de mis vidas. Y yo soy el amor de tu vida. Sé el miedo que supone amarme, conozco tu temor. Soy consciente de que estás aterrorizada, que no querés quedarte con el amor en las manos. Y no te vas a quedar. Nunca vas a estar sola, porque estoy seguro de que quiero una vida a tu lado, de que quiero darte una vida a mi lado. No puedo, no quiero, no intento, no deseo, no anhelo la muerte. Quiero vivir, y vivir a tu lado. Quiero una vida llena de amor y no me interesa ninguna experiencia amorosa con nadie que no sea con vos. Abrazá ese dolor, porque es parte de tu sensibilidad, parte de tu amor, pero no te aferres a él. Vamos a estar bien, vos y yo. Vamos a estar bien, juntos. Vamos a estar bien, con nuestra familia. Somos uno los dos, seremos uno los tres, seremos unos los cuatro, seremos uno los que seamos. Esto recién está empezando, lo recalco siempre que tengo la oportunidad, siempre que me parece oportuno. La vida nos depara mucho, mucho dolor que es inevitable; la vida va a estar llena de estos miedos, pero juntos vamos a aplacarlos, a dejarlos en segundo plano. De tantas sonrisas la muerte se va a inhibir.\n\nMe tocó acompañarte en uno de los mayores logros de tu vida, te vi sobre un escenario, hablándole a decenas de personas sobre un proyecto que puliste con lágrimas y corazón. Te vi lograr lo que te propusiste años atrás, conseguir ese título universitario que simplemente le puso nombre a las toneladas de sabiduría que hay en tu cerebro. Mientras te observaba dar una masterclass de oratoria, te imaginaba en el futuro, cuando me toque volver a acompañarte en cada uno de tus logros. Y cómo me enorgullece pensarlo. Vas a tener merecido cada uno de esos logros, y la historia se va a repetir. Voy a estar para calmarte cuando creas que no podés más, para alivianar ese dolor y evitar esa explosión. Siempre voy a estar ahí para que puedas perseguir tus sueños sin miedo a que se esfumen entre tus pensamientos negativos.\n\nY cuando te pienso llorando de frustración por culpa de esa carrera que te quitó tantas lágrimas, me es imposible no recordar cada uno de tus dolores. Voy a estar ahí siempre, para curar cada una de esas llagas que buscan lastimar al ser más puro y bondadoso que jamás existió, o al menos de los que fueron descubiertos por Iñaki Erreguerena. Perdón si sentís que es una exageración, pero yo hablo desde la absoluta verdad de mi subjetividad objetiva y te invito a que te lo tomes como una verdad por un minuto. Lee y relee las palabras que te digo e intentá dimensionar lo que significas para mí. Lo que significa que seas la persona más graciosa que conozco, la más linda, la más buena. Aunque te niegues a creerlo, en mi cabeza las cosas funcionan así y ojalá el ejercicio de intentar pensarlo de esa manera te sirva para entenderme.",
+  "Estando en un recital, rodeado de decenas de miles de personas. Veo hombres y mujeres de todas las edades, alturas y clases sociales. Percibo la cantidad de batallas internas que pasan todos ellos y solo me puedo preguntar: ¿cómo hice yo para conseguir a una mujer que me ayude a apagar todos esos dolores por al menos un rato? Entre millones de posibilidades, ¿cómo pude coincidir con la correcta?\n\nEscucho el bullicio, discusiones y risas, llantos de alegría y de nenes que se quieren ir a su casa. Veo luces, humo, oigo música a todo volumen y mi mente solo permite pensar en cosas lindas relacionadas a vos. Qué bueno va a estar cuando vivamos tantas experiencias juntos. Qué hermoso todo lo que se viene, el hecho de vivir una vida con vos me motiva a seguir incluso en esos días en los que ni mis propios sueños me incitan a continuar intentándolo.\n\nEl miedo me come por dentro. Te veo dormir y veo la nariz y la mandíbula que deseo que les heredes a mis hijos, pero el miedo me sigue comiendo. La posibilidad de que decidas abandonarme me asusta y me paraliza. Me pongo como objetivo hacerte bien, porque tu bienestar es lo que más anhelo en este momento, junto al mío. El temor me atemoriza pero tengo confianza plena en que lo vas a lograr, en que voy a ser tu motor esos días en los que no tengas fuerza y tu pulmón en esos días en los que no aguantes más. Somos dos y siempre lo vamos a ser. Este doloroso proceso va a valer la pena cuando miremos con nostalgia al pasado al ver los ojos de nuestros hijos, cuando no añoremos estos sentimientos pero abracemos la mejoría y valoremos el bienestar logrado. Vamos a lograrlo.\n\nCada lágrima tuya pesa una tonelada en mi hombro. Cada tristeza aflige mi corazón como una propia. Busco maneras de hacerte sonreír hasta el hartazgo, a veces me sale. Disfruto de cada sonrisa como si fuera la última, porque sé que no es fácil verte sonreír. A veces las cuento en mi cabeza, otras veces las cuento en voz alta. Cuando se dibuja esa medialuna ascendente en la parte inferior de tu rostro, yo entiendo que quizás la vida no es tan mala como me gusta creer. En tu felicidad encuentro el sentido y en tu tristeza transito el dolor. Ya llegarán los días en los que la felicidad sea mayoritaria en tus días, en los que las lágrimas dejen de pesar en mi hombro y en los que esa medialuna sea semipermanente. Dale tiempo a este proceso, todo va a estar bien.\n\nA veces la posibilidad de perderte se vuelve una realidad y me abruma la existencia de ese probable disgusto. Sufro cuando me imagino una vida sin vos porque este tiempo a tu lado me hizo proyectar escenarios que ni yo creía que eran posibles de proyectar. Quiero casarme, formar una familia, pero el miedo a perderte es latente. Y se hace fuerte por las noches, cuando ya no aguanto ni las pausas de la voz de mi cabeza, cuando hasta la quietud de mis músculos me genera tensión. El miedo existe y se siente horrible. La inseguridad me quema por dentro y solo siento que un abrazo tuyo es capaz de calmar el ritmo de mis palpitaciones, de cesar las gotas rebosantes de mis ojos. Pero me retrotraigo a mis primeras palabras de este texto, no puedo cargar en vos el peso de una persona depresiva. No puedo depender de un abrazo, pero es como mi cuarta medicina. Porque ni 15 miligramos de vortioxetina logran una antidepresión tal como la de tu respiración en mi oído marcando el ritmo perfecto para tranquilizarme.\n\nEstoy cansado pero sigo por vos, estoy agotado pero no te quiero lastimar. No aguanto más este dolor pero sé que vos no aguantarías el dolor que te puedo causar si me voy. No quiero hacerte eso y por eso me mantengo acá, aunque llego a sentir que la vida no merece la pena ser vivida. Quizás algún día el panorama cambie, mis deseos mejoren, mis proyectos se concreten como ideas ilusorias de lo que un día puedo llegar a ser.\n\nMientras tanto, me toca aguantar respirando profundo y haciendo los crucigramas que me inculcaste. Hoy los hago sabiendo que el amor no es solo una palabra de cuatro letras. Hoy los hago sabiendo que el corazón no es solo un órgano vital y que un abrazo es mucho más que una muestra de afecto. Hoy completo el crucigrama pensando que erróneamente definen a un beso como un choque de labios o a un “te amo” como dos palabras que componen una expresión sentimental. Hoy sé que el enamoramiento es más que un sentimiento de corazón lleno, que una pareja es más que un compañero sentimental. Hoy entiendo que mi tía bisabuela decidió reducir un mundo de sensaciones a definiciones vacías de pocas palabras que no expresan ni un mínimo porcentaje de lo que representan.\n\nLa grandeza es algo importante, porque gigante es el amor que siento pero vivo con el miedo de que me abandones y dejes un hoyo tan grande como el amor que te estoy narrando. Me aterra alejarme de tus brazos y dejar de sentir el calor de tus besos. Me aguzo por intentar que esos pensamientos salgan de mi cabeza y doblo mis sentidos para concentrarme en un presente que es cada vez más hermoso, pero qué difícil es vivir con esta enfermedad que no me permite ser contenido por el amor más puro que alguna vez sentí.",
+  "Las gotas golpean la ventana como si el cielo también quisiera decir algo, en esta tarde lenta de un miércoles de febrero. El tiempo pasó —sigue pasando— y en su avance silencioso nos va revelando de a poco, como un libro que no se lee de golpe. Nos conocemos más, sí, aunque todavía nos espera casi todo: una vida entera abierta, intacta, por delante.\n\nAl comienzo de este texto hablé del tiempo, de esa fuerza invisible que vos torciste en apenas unas semanas. De cómo, sin pedir permiso, me cambiaste la forma de estar en el mundo. Y una vez más volvés a elegir quedarte, jugártela por mí, como si no supieras hacerlo de otra manera. Escribo este párrafo para dejar constancia de algo simple y enorme a la vez: valoro cada gesto que nace de tu corazón, cada acto pequeño que tiene como único objetivo cuidarnos, proteger eso que estamos construyendo, pensar en un mañana que todavía no tiene nombre pero ya tiene sentido.\n\nFaltan cientos de días para ponerle una etiqueta a lo nuestro, pero vos me cuidás como si ya fuéramos todo. Me acompañaste al médico, y en ese gesto mínimo vive una verdad mucho más profunda que cualquier ‘te amo’ apurado o cualquier promesa lanzada al futuro. El presente es hermoso porque tus actos lo vuelven habitable, porque hay una devoción silenciosa e inmensa en cada decisión que nos incluye.\n\nSi la vida promedio en este país dura setenta y ocho años, todavía nos esperan casi seis décadas juntos. Por eso digo que esto recién empieza. Ya pasamos nuestras primeras fiestas compartidas, pero dentro de treinta años vamos a ser nosotros quienes armen la mesa, quienes sostengan la tradición. Si contamos desde septiembre de 2025, ni siquiera alcanzamos el 0,75% del tiempo que vamos a compartir, y sin embargo hay momentos en los que parece que nos conociéramos desde siempre. Como si el amor, cuando es real, no necesitara estadísticas para saberse eterno.\n\nNo sos consciente de lo que es ese porcentaje del que te hablo. Es el primer sorbo de un café que todavía quema, ese sorbo que aún no te deja sentir el sabor. Es la esquina en blanco de un cuaderno con apenas una palabra escrita, cuando un libro de cientos de páginas espera paciente a ser escrito. Es esa luz que entra por la rendija de la persiana al amanecer en medio de la oscuridad de una noche que no se rindió del todo. Es el primer latido que notás cuando apoyás tu cabeza en mi pecho, sabiendo que vas a quedarte ahí por horas o la primera chispa de esa fogata de horas que le debemos a mi mamá. Es guardar el cargador en una mochila mientras estés preparando nuestra primera mudanza juntos; estamos dando un paso dentro del agua fría sin haber empezado a nadar, pero con la convicción de entrar. El tiempo es casi nulo en comparación a lo que aún falta, pero increíblemente ya vivimos tanto.\n\nY aunque me inclino a pensar en el futuro, en ese futuro certero a tu lado, no sé qué va a pasar, y tampoco necesito saberlo. Por primera vez la incertidumbre no me asusta. Hoy no necesito anticiparme al futuro ni inventar seguridades para sentir que lo que estamos viviendo tiene un sentido. Hay algo profundamente valioso en este ahora que estamos habitando, que estamos sintiendo y disfrutando. En este punto exacto donde no tenemos un nombre que nos defina pero sí tenemos gestos, miradas y silencios que hablan más que cualquier nomenclatura. Y cuando el mañana nos acerque y nos transforme en algo más, nada le va a quitar el valor a lo que ya está siendo esta previa de incerteza que ni como preludio ni como ensayo elegimos vivir como parte real y existente de nuestro amor.",
+// agregá más páginas si querés
 ];
-const TOTAL_PAGES = 24; // Cambialo si vas a usar otra cantidad
+const TOTAL_PAGES = 27; // Cambialo si vas a usar otra cantidad
 
 // 2) Video: poné un link de YouTube o Vimeo (string) O deja vacío y poné un archivo local (ver abajo).
 const videoURL = "https://www.youtube.com/embed/RpdVHksS740"; // Ejemplo. Pegar tu link embed.
@@ -105,6 +138,79 @@ Siento mi corazón latiendo más rápido,
 creí que ya no sucedería
 
 Sucedió, porque uno solo no siempre basta`
+  },
+  {
+    title: "Gris",
+    verses: `Mis mofletes se acostumbran a la humedad,
+se agrietan con el pasar de los días
+
+El gris tiñe mis emociones,
+la oscuridad intenta atraparme
+
+Encontré color en la paleta más descolorida
+`
+  },
+  {
+    title: "Azul cansancio",
+    verses: `Estaba cansado, pero no del cuerpo:
+del alma que arrastraba los días como si fueran demasiado largos.
+Hasta que ella llegó.
+
+Mi corazón había olvidado su pulso, latía por inercia,
+en un ritmo apagado que confundí con normalidad.
+Hasta que ella llegó.
+
+Todo era azul. Un azul espeso.
+Me dolía caminar dentro de mí,
+me dolía sostener mi propio peso,
+como si existir fuera un esfuerzo excesivo.
+
+Y entonces llegó ella,
+sin promesas, sin estridencias,
+con un rojo contenido en la mirada.
+
+El azul dejó de ser frío.
+`
+  },
+  {
+    title: "Amarillo tibio",
+    verses: `Empezamos a hablar y el aire bajó la voz.
+ No pasó nada extraordinario,
+ solo el mundo aflojando los hombros.
+
+Algo en mí dejó de temblar.
+ El silencio ya no pesaba, el día era más amable,
+ como una luz que no encandila pero abriga.
+
+Era amarillo tibio: esa calma que no promete,
+ pero se queda.
+
+Y cuando creí entenderlo, apareció otra vez
+ su rojo contenido.
+`
+  },
+    {
+    title: "Rojo contenido",
+    verses: `Ya no hizo falta buscarte: estabas.
+En el gesto mínimo,
+en el pulso compartido,
+en la calma que aprendió a quedarse.
+
+Tu pelo caía como un abrigo lento,
+ordenando el mundo
+con solo rozarme.
+
+El amor no gritó. Se sentó a mi lado,
+respiró conmigo, y encendió todo
+sin quemarlo.
+
+Todo lo que fui esperando
+encontró forma en vos.
+No hubo prisa,
+no hubo miedo:
+solo el rojo contenido
+sosteniendo al resto de los colores.
+`
   },
 ];
 
@@ -224,15 +330,52 @@ const quiz = [
 
 // 6) Playlist: arreglo con objetos {title, artist, comment, url (opcional)}
 const playlist = [
+
   { title: "Otras vidas", artist: "Carlos Rivera", comment: "La primera canción 'nuestra', la que define nuestro vínculo ancestral", url: "https://open.spotify.com/intl-es/track/4PlJVuGGWP8asQJDl2pCL4?si=3ed8fd8c87cf4cbc" },
   { title: "Digan lo que digan", artist: "Carlos Rivera", comment: "Nuestro puto padre mandando a callar a los detractores", url: "https://open.spotify.com/intl-es/track/3fVCHWVR5B1iCs4srsl0Sz?si=b957f31174184480" },
   { title: "Through the dark", artist: "One Direction", comment: "La primera canción que recuerdo que me dediques en una notita", url: "https://open.spotify.com/intl-es/track/1a0PcmEJAOEp4ZT3YtSLkM?si=3774a8146de04a21" },
   { title: "Princesa", artist: "Margarita y Rey", comment: "Somos esos", url: "https://open.spotify.com/intl-es/track/0IbD0w9MDfwgBWiM4TAma7?si=34de78ed21464c2e" },
-  { title: "Otras vidas", artist: "Carlos Rivera", comment: "La primera canción 'nuestra', la que define nuestro vínculo ancestral", url: "https://open.spotify.com/intl-es/track/4PlJVuGGWP8asQJDl2pCL4?si=3ed8fd8c87cf4cbc" },
-  { title: "Otras vidas", artist: "Carlos Rivera", comment: "La primera canción 'nuestra', la que define nuestro vínculo ancestral", url: "https://open.spotify.com/intl-es/track/4PlJVuGGWP8asQJDl2pCL4?si=3ed8fd8c87cf4cbc" },
-  { title: "Otras vidas", artist: "Carlos Rivera", comment: "La primera canción 'nuestra', la que define nuestro vínculo ancestral", url: "https://open.spotify.com/intl-es/track/4PlJVuGGWP8asQJDl2pCL4?si=3ed8fd8c87cf4cbc" },
-  { title: "Otras vidas", artist: "Carlos Rivera", comment: "La primera canción 'nuestra', la que define nuestro vínculo ancestral", url: "https://open.spotify.com/intl-es/track/4PlJVuGGWP8asQJDl2pCL4?si=3ed8fd8c87cf4cbc" },
-  { title: "Otras vidas", artist: "Carlos Rivera", comment: "La primera canción 'nuestra', la que define nuestro vínculo ancestral", url: "https://open.spotify.com/intl-es/track/4PlJVuGGWP8asQJDl2pCL4?si=3ed8fd8c87cf4cbc" },
+  { title: "Cosas que odio de vos", artist: "Floricienta", comment: "Esperando el remix de Margarita y Rey", url: "https://open.spotify.com/intl-es/track/2KG2LRfvIcK0AyFHMsnS0Q?si=dcf7d6b6577c4b31" },
+  { title: "Ready to run", artist: "One Direction", comment: "La canción que definió el hecho de que te la juegues por mí", url: "https://open.spotify.com/intl-es/track/7GtGeeChOx4NS77bqK8SUx?si=dfd70b57a4c94a55" },
+  { title: "Y así será", artist: "Floricienta", comment: "Iñuñu se puso melancólico y está canción le hizo acordar a vos", url: "https://open.spotify.com/intl-es/track/0AEqmSNKieNuBI8Gj6v1UN?si=7adea2114ffc4564" },
+  { title: "Herederos", artist: "David Bisbal", comment: "Somos herederos de sangre!!!", url: "https://open.spotify.com/intl-es/track/7oQjhYvoiC6WLdRQmoROss?si=1132ff41caf14e43" },
+  { title: "Boyfriend", artist: "Justin Bieber", comment: "Con este tema intento convencerte de que seas mi novia!!", url: "https://open.spotify.com/intl-es/track/3ZsOYk34IQMrH4B1PBdofL?si=51c8ac27b2f84776" },
+  { title: "Te Diría", artist: "Los Piojos", comment: "El que puse en tu notita y no te diste cuenta de la indirecta", url: "https://open.spotify.com/intl-es/track/3xFOPj0V6S4v2b3CH0Llvf?si=bd6a4b6fd0304223" },
+  { title: "IConic.mp3", artist: "Emilia", comment: "Somos icónicos.", url: "https://open.spotify.com/intl-es/track/6ZVLfXr015ogdhov4FW4pG?si=b07c4489ef0f429c" },
+  { title: "GTA.mp3", artist: "Emilia", comment: "Te toco en secreto bajo la mesa (9 de octubre)", url: "https://open.spotify.com/intl-es/track/6hv8hai0yo19JF2c6pppj6?si=e35e2b95a6d74366" },
+  { title: "Jagger.mp3", artist: "Emilia", comment: "Tu canción!!!", url: "https://open.spotify.com/intl-es/track/5XUWO8VqwE4PEkLYAtt7h7?si=074a555c364a4bcd" },
+  { title: "Y Quemás", artist: "Los Piojos", comment: "Te necesito.", url: "https://open.spotify.com/intl-es/track/499kpq8yWHsIWhWrM0Wk6v?si=19899bea96a441df" },
+  { title: "FAVORITA", artist: "Angela Torres", comment: "La que suena siempre que prendemos la tele en tu casa", url: "https://open.spotify.com/intl-es/track/6EhX9FjpQZ5CohoGeqUM2u?si=4c3d3d3965ba4adc" },
+  { title: "ANIMAL", artist: "ACRU ft. WOS", comment: "El primer gusto en el que coincidimos allá en septiembre de 2025", url: "https://open.spotify.com/intl-es/track/06b0Au6pvZiO03eKTCvgWh?si=3a92eed1619945c5" },
+  { title: "Paciencia", artist: "Los Piojos", comment: "Habrá que esperar a septiembre para ver el Sol...", url: "https://open.spotify.com/intl-es/track/5D49CFF1HvSiOGsfw6aOuq?si=16e62517788c49cf" },
+  { title: "ALMA DINAMITA", artist: "WOS", comment: "De las que completamos en aquel sporcle... 'me gusta todo lo que sos y un poco más'", url: "https://open.spotify.com/intl-es/track/2ONADYjJvqYVwjWavuY0H1?si=731784b7de8f4d66" },
+  { title: "Amor Prohibido", artist: "Luis Fonsi", comment: "Si me permites, te doy mi vida", url: "https://open.spotify.com/intl-es/track/0TWV9Q3Okgi1VrTPT3Arh5?si=835b45081730472e" },
+  { title: "Celos", artist: "Luciano Pereyra", comment: "PORQUE ME MUERO DE CELOOOOS", url: "https://open.spotify.com/intl-es/track/2EVLmBQuVZmfAQArawHpRu?si=46c7b159c5bb415d" },
+  { title: "Que Suerte Tiene Él", artist: "Luciano Pereyra", comment: "Me trae flashbacks de cuando la escuchaba y pensaba en todo lo que dice mientras eras mi armani", url: "https://open.spotify.com/intl-es/track/1Pc4HQCKJbvDoCdC0TqR4P?si=9a024491fdfa4d23" },
+  { title: "¿Qué Vas A Hacer Tan Sola Hoy?", artist: "Viejas Locas", comment: "Ni quiero que tu novio sepa lo que hicimos hoy", url: "https://open.spotify.com/intl-es/track/2wH2ZanAfGj9REJSbC4nIQ?si=8e9f1c330b26488c" },
+  { title: "Soy Tuyo", artist: "Andrés Calamaro", comment: "Con mi mayor convicción, soy tuyo, con toda la fuerza de mi corazón que es tuyo", url: "https://open.spotify.com/intl-es/track/1d4fWuxcszsjBBm5rlvRuX?si=e545ba553cbf413c" },
+  { title: "Algo contigo", artist: "Rita Payés ft. Elisabeth Roma", comment: "Hace falta que te diga????", url: "https://open.spotify.com/intl-es/track/1FG7TNfGc5HNYauiobhZHk?si=54c06b6a6227494d" },
+  { title: "Loca", artist: "Tan Bionica", comment: "Me gustás así de loca", url: "https://open.spotify.com/intl-es/track/2n0NCtkvHx1oPqgiAvexiB?si=3859dbd08e92483b" },
+  { title: "Steal My Girl", artist: "One Direction", comment: "De esas que escuchábamos en las primeras jams", url: "https://open.spotify.com/intl-es/track/2Bs4jQEGMycglOfWPBqrVG?si=4f2b314ddad34ea4" },
+  { title: "Kiss You", artist: "One Direction", comment: "Me acuerdo que cuando me mostraste el video de tu colegio me dijiste 'no cualquiera vio este video, eh'", url: "https://open.spotify.com/intl-es/track/0AkQbXGN4KG34TS7xLrM68?si=e5489a34239c432d" },
+  { title: "rápido lento", artist: "Emilia ft. Tiago PZK", comment: "Mi agua bendita es tu transpiración", url: "https://open.spotify.com/intl-es/track/4xv2A022v5A8nyewDkYOkQ?si=1c0d776fb0694301" },
+  { title: "No Necesito Nada", artist: "No Te Va Gustar", comment: "Ya es tuya la voz con la que antes cantaba", url: "https://open.spotify.com/intl-es/track/5A44iIZenvd56WXWCO9K5K?si=72a3f56a5707477a" },
+  { title: "Verte Reír", artist: "No Te Va Gustar", comment: "Ojalá no sea tarde para volver a nacer, para poder levantarte", url: "https://open.spotify.com/intl-es/track/6StWP4Tvs8Ci6QOCIDefYk?si=c80b7d024b31466c" },
+  { title: "Rara Vez", artist: "Milo j", comment: "Rara vez te vi estando con aquel...", url: "https://open.spotify.com/intl-es/track/7MVIfkyzuUmQ716j8U7yGR?si=420fb2ab860e4a95" },
+  { title: "TU Y YO", artist: "Emilia ft. KHEA", comment: "Y vamo a la cama para PIIIP", url: "https://open.spotify.com/intl-es/track/00THZGfbizNvMUkJsQs74K?si=d6a24552abdf40b1" },
+  { title: "Perfecta", artist: "Miranda", comment: "Somos esos", url: "https://open.spotify.com/intl-es/track/09QfIIP4NUx4A3thmovb2o?si=6bcfdaaf1fd34263" },
+  { title: "Me Haces Bien", artist: "Salvapantallas", comment: "Basta ver el reflejo de tus ojos en los míos, para entender que el corazón no miente, que afortunadamente, me hacés bien", url: "https://open.spotify.com/intl-es/track/10tXnZdrR5pXs7fkYwIdEs?si=e8665f449ef0446f" },
+  { title: "Nena, Me Gustas Así", artist: "Viejas Locas", comment: "Con el pelo despeinado, las lagañas colgando, PENDEJA DE MIERDA ME GUSTÁS ASÍ!!!!", url: "https://open.spotify.com/intl-es/track/49nF7vzCs1VCy9dhzPQIUU?si=9f1ad950c39e4575" },
+  { title: "Espresso", artist: "Sabrina Carpenter", comment: "And I am thinkin' 'bout you every night, say I can't sleep", url: "https://open.spotify.com/intl-es/track/49nF7vzCs1VCy9dhzPQIUU?si=9f1ad950c39e4575" },
+  { title: "Risk", artist: "Gracie Abrams", comment: "Gracias, mi amor.", url: "https://open.spotify.com/intl-es/track/0gZGUAO42F1HmzZWHNPGAu?si=513485615f8548a2" },
+  { title: "Stockholm Syndrome", artist: "One Direction", comment: "Mirá lo que te hice (nos hicimos)", url: "https://open.spotify.com/intl-es/track/6AzCBeiDuUXGXjznBufswB?si=419acba5061740cc" },
+  { title: "Agua Marfil", artist: "Usted Señalemelo", comment: "Corramos juntos, no mirés atrás", url: "https://open.spotify.com/intl-es/track/4lOP4BFzkPCECQTcVJgZPL?si=8222dfe5097d4ccf" },
+  { title: "SOLO POR VOS", artist: "Trueno", comment: "Y yo que estaba preparado para vivir la vida solo de una vez...", url: "https://open.spotify.com/intl-es/track/5Ejw3lC6Srj8VK4fHgTZAi?si=79e50c2da7f54806" },
+  { title: "Todo el día así", artist: "Koino Yokan", comment: "Todo el día así, con vos así", url: "https://open.spotify.com/intl-es/track/1EAOYGRgF3eUJLZMSfin7P?si=9e94b276090146a8" },
+  { title: "Mazas y Catapultas", artist: "Kase.O", comment: "Yo que ya me había acostumbrado a la soledad", url: "https://open.spotify.com/intl-es/track/0xXhgLXfEHnWJHVgRvFvdn?si=99c168270b84403d" },
+  { title: "Creo en Ti", artist: "Reik", comment: "Cuando estaba a medio paso de caer, mis silencios se encontraron con tu voz", url: "https://open.spotify.com/intl-es/track/5Ejw3lC6Srj8VK4fHgTZAi?si=79e50c2da7f54806" },
+  { title: "FRIKI", artist: "Angela Torres", comment: "Miuchis degenerada", url: "https://open.spotify.com/intl-es/track/53HqSdI5pWQAnFebegmzZO?si=f6b704a39c79481d" },
+  { title: "¿Cómo Pagarte?", artist: "Carlos Rivera", comment: "No sé si me alcance la vida...", url: "https://open.spotify.com/intl-es/track/6WXqlvByvbAgT2md5MnDYk?si=7f293ace16924426" },
 
 
 ];
@@ -257,9 +400,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   openPresentationsBtn.addEventListener("click", () => {
     // Abrir la primera presentación del array en otra pestaña
-    const firstPpt = presentations[0];
-    window.open(firstPpt.fileUrl, "_blank"); // "_blank" abre en nueva pestaña
-  });
+    const presentationWrapper = document.querySelector('#presentationModal .presentation-wrapper');
+});
 });
 
 
@@ -349,12 +491,12 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // aseguremos que existan prev/next and counter
         if(!get('prevPoem')) {
-          const btn = document.createElement('button'); btn.id='prevPoem'; btn.className='muted'; btn.textContent='« Anterior';
+          const btn = document.createElement('button'); btn.id='prevPoem'; btn.className='muted'; btn.textContent='Anterior';
           const controls = content.querySelector('.poem-controls') || (function(){ const d=document.createElement('div'); d.className='poem-controls'; content.appendChild(d); return d; })();
           controls.insertBefore(btn, controls.firstChild);
         }
         if(!get('nextPoem')) {
-          const btn = document.createElement('button'); btn.id='nextPoem'; btn.className='muted'; btn.textContent='Siguiente »';
+          const btn = document.createElement('button'); btn.id='nextPoem'; btn.className='muted'; btn.textContent='Siguiente';
           const controls = content.querySelector('.poem-controls') || (function(){ const d=document.createElement('div'); d.className='poem-controls'; content.appendChild(d); return d; })();
           controls.appendChild(btn);
         }
@@ -438,8 +580,59 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pageCounter) pageCounter.textContent = `${pageIndex+1} / ${TOTAL_PAGES}`;
   }
 
-  safeOn('prevPage', 'click', () => { if (pageIndex > 0) pageIndex--; renderPage(); });
-  safeOn('nextPage', 'click', () => { if (pageIndex < TOTAL_PAGES - 1) pageIndex++; renderPage(); });
+// Botón anterior
+safeOn('prevPage', 'click', () => { 
+  if (pageIndex > 0) pageIndex--; 
+  renderPage(); 
+});
+
+// Botón siguiente
+safeOn('nextPage', 'click', () => { 
+  if (pageIndex < TOTAL_PAGES - 1) pageIndex++; 
+  renderPage(); 
+});
+
+// Botón "Ir" (salto directo a página)
+safeOn('goPage', 'click', () => {
+  const input = document.getElementById('pageJump');
+  let page = parseInt(input.value, 10);
+
+document.getElementById("goPage").addEventListener("click", () => {
+  const page = parseInt(document.getElementById("pageJump").value, 10);
+  if (page >= 1 && page <= bookPages.length) {
+    currentPage = page - 1; // porque el array empieza en 0
+    renderPage();
+  }
+});
+
+const pageJumpInput = document.getElementById("pageJump");
+const goPageBtn = document.getElementById("goPage");
+
+function goToPage() {
+  const page = parseInt(pageJumpInput.value, 10);
+  if (page >= 1 && page <= bookPages.length) {
+    currentPage = page - 1; // porque el array empieza en 0
+    renderPage();
+  }
+}
+
+// click en botón "Ir"
+goPageBtn.addEventListener("click", goToPage);
+
+// presionar Enter dentro del input
+pageJumpInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    goToPage();
+  }
+});
+
+  if (!isNaN(page) && page >= 1 && page <= TOTAL_PAGES) {
+    pageIndex = page - 1; // porque el array empieza en 0
+    renderPage();
+  } else {
+    alert("Número de página inválido");
+  }
+});
 
   // inicial openBook handler sets pageIndex=0 already above
 
@@ -540,13 +733,26 @@ function renderQuiz() {
   const quizOptionsEl = get('quizOptions');
   const quizResultEl = get('quizResult');
 
-  // Si terminamos todas las preguntas
+  // Si ya terminamos todas las preguntas
   if (currentQuestion >= quiz.length) {
     if (quizQuestionEl) {
       quizQuestionEl.textContent = `🎉 ¡Quiz terminado! Tu puntaje: ${score} / ${quiz.length}`;
     }
+
     if (quizOptionsEl) {
       quizOptionsEl.innerHTML = '';
+
+      // Mensaje final arriba (llamativo)
+      const msg = document.createElement('div');
+      msg.classList.add('final-message');
+      if (score <= 2) msg.textContent = "Atrás detractores de Miaki!!! Aguante esta relación";
+      else if (score <= 4) msg.textContent = "Fake fan, estudiá tarado!";
+      else if (score <= 6) msg.textContent = "Un poco sabés pero te falta leche";
+      else if (score <= 8) msg.textContent = "FAN DE ESTA RELACIÓN, GRACIAS!";
+      else msg.textContent = "Claramente sos Miuchis u Iñuñu, o alguien demasiado fan";
+      quizOptionsEl.appendChild(msg);
+
+      // Botón de cerrar debajo del mensaje
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'Cerrar quiz';
       closeBtn.addEventListener('click', () => {
@@ -554,25 +760,16 @@ function renderQuiz() {
         if (quizModal) quizModal.classList.add('hidden');
       });
       quizOptionsEl.appendChild(closeBtn);
-
-      // Mensaje según puntaje
-      const msg = document.createElement('div');
-      msg.style.marginTop = '12px';
-      msg.style.fontWeight = 'bold';
-      msg.style.color = '#000000ff';
-      if (score <= 2) msg.textContent = "Atrás detractores de Miaki!!! Aguante esta relación";
-      else if (score <= 4) msg.textContent = "Fake fan, estudiá tarado!";
-      else if (score <= 6) msg.textContent = "Un poco sabés pero te falta leche";
-      else if (score <= 8) msg.textContent = "FAN DE ESTA RELACIÓN, GRACIAS!";
-      else msg.textContent = "Claramente sos Miuchis u Iñuñu, o alguien demasiado fan";
-      quizOptionsEl.appendChild(msg);
     }
+
     if (quizResultEl) quizResultEl.classList.add('hidden');
     return;
   }
+
   // Pregunta actual
   const q = quiz[currentQuestion];
   if (!q) return;
+
   if (quizQuestionEl) quizQuestionEl.textContent = q.q;
   if (!quizOptionsEl || !quizResultEl) return;
 
@@ -600,11 +797,11 @@ function renderQuiz() {
         quizResultEl.textContent = `✖ Incorrecto — La respuesta correcta era: "${q.options[q.ans]}"`;
       }
 
-      // Avanzar a la siguiente pregunta después de 1.2s
+      // Avanzar a la siguiente pregunta después de 1s si no terminó
       setTimeout(() => {
         currentQuestion++;
         renderQuiz();
-      }, 1200);
+      }, 1000);
     });
 
     quizOptionsEl.appendChild(btn);
@@ -617,26 +814,52 @@ function renderQuiz() {
   safeOn('openQuiz', 'click', () => { currentQuestion = 0; score = 0; renderQuiz(); });
 
   // Playlist
-  function renderPlaylist() {
-    const playlistEl = get('playlist');
-    if (!playlistEl) return;
-    playlistEl.innerHTML = '';
-    playlist.forEach((p,i) => {
-      const item = document.createElement('div');
-      item.style.padding = '8px';
-      item.style.marginBottom = '8px';
-      item.style.background = 'rgba(255,255,255,0.02)';
-      item.innerHTML = `<strong>${p.title}</strong> — ${p.artist}<div style="font-size:13px;color:#bfc9d9">${p.comment}</div>`;
-      if (p.url) item.innerHTML += `<div style="margin-top:6px"><a href="${p.url}" target="_blank">Escuchar</a></div>`;
-      playlistEl.appendChild(item);
+function renderPlaylist() {
+  const playlistEl = get('playlist');
+  if (!playlistEl) return;
+  playlistEl.innerHTML = '';
+
+  playlist.forEach((p, i) => {
+    // contenedor del ítem
+    const item = document.createElement('div');
+    item.className = 'playlist-item';
+
+    // info de la canción
+    const info = document.createElement('div');
+    info.className = 'playlist-info';
+info.innerHTML = `
+  <div class="song-header">
+    <span class="title">${p.title}</span><span class="artist"> — ${p.artist}</span>
+  </div>
+  <div class="comment"> ${p.comment}</div>
+`;
+
+
+
+    // botón de play con imagen
+    const playBtn = document.createElement('button');
+    playBtn.className = 'play-btn';
+
+    const icon = document.createElement('img');
+    icon.src = 'https://raw.githubusercontent.com/inakierreguerena1-cyber/9-9/main/Play.png'; // 🔁 reemplazá con tu ruta real
+    icon.alt = 'Escuchar';
+    icon.className = 'play-icon';
+
+    playBtn.appendChild(icon);
+    playBtn.addEventListener('click', () => {
+      if (p.url) window.open(p.url, '_blank');
     });
-  }
+
+    // ensamblar
+    item.appendChild(info);
+    item.appendChild(playBtn);
+    playlistEl.appendChild(item);
+  });
+}
+
+
 
   renderPlaylist();
-
-  // Proposal buttons
-  if (get('yesBtn')) get('yesBtn').addEventListener('click', () => { get('yesBtn').textContent = '¡Qué felicidad! ❤️'; });
-  if (get('noBtn')) get('noBtn').addEventListener('click', () => { get('noBtn').textContent = 'Gracias por tu honestidad ✨'; });
 
   // keyboard for book as well
   document.addEventListener('keydown', (e) => {
@@ -649,4 +872,443 @@ function renderQuiz() {
     }
   });
 
+  safeOn('openGallery', 'click', () => openModal('galleryModal'));
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const destino = link.getAttribute('href').replace('#', '');
+
+    // Ocultar todas las pantallas
+    document.querySelectorAll('.pantalla').forEach(sec => sec.classList.remove('active'));
+
+    // Mostrar la pantalla seleccionada
+    const target = document.getElementById(destino);
+    if (target) target.classList.add('active');
+  });
+});
+
+function renderPresentations() {
+  const modalContent = document.querySelector('#presentationModal .presentation-wrapper');
+  if (!modalContent) return;
+  modalContent.innerHTML = ''; // limpiar antes de renderizar
+
+  presentations.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'presentation-item';
+    item.innerHTML = `
+      <h3>${p.title}</h3>
+      <p>${p.description}</p>
+      <iframe src="${p.fileUrl}" frameborder="0" allowfullscreen></iframe>
+    `;
+    modalContent.appendChild(item);
+    
+  });
+}
+const openPresentations = document.getElementById('openPresentations');
+const presentationModal = document.getElementById('presentationModal');
+
+if (openPresentations && presentationModal) {
+  openPresentations.addEventListener('click', (e) => {
+    e.preventDefault(); // ✅ evita que se dispare un link
+    presentationModal.classList.remove('hidden');
+  });
+}
+
+
+
+const fechasImportantes = [
+  { fecha: "12/5/2024", descripcion: "Nos conocimos en el grupo de minecra" },
+  { fecha: "22/5/2025", descripcion: "Me agregaron a only reals y nos empezamos a conocer" },
+  { fecha: "31/5/2025", descripcion: "Nos vimos por primera vez" },
+  { fecha: "12/7/2025", descripcion: "Me agregaron a one direction" },
+  { fecha: "27/8/2025", descripcion: "Hablamos por primera vez por privado" },
+  { fecha: "8/9/2025", descripcion: "Empezamos a hacer Discord diario de muchas horas"},
+  { fecha: "27/9/2025", descripcion: "Nos juntamos solos por primera vez"},
+  { fecha: "4/10/2025", descripcion: "Nos dijimos 'te amo' por primera vez"},
+  { fecha: "7/10/2025", descripcion: "Nos juntamos solos en San Vicente y se empezó a confirmar todo"},
+  { fecha: "10/10/2025", descripcion: "Nos dimos nuestro primer beso"},
+  { fecha: "14/10/2025", descripcion: "Nos conocimos íntimamente"},
+  { fecha: "2/11/2025", descripcion: "Dormimos juntos por primera vez"},
+  { fecha: "13/11/2025", descripcion: "Tuvimos relaciones por primera vez"},
+  { fecha: "3/12/2025", descripcion: "Te recibiste y festejamos juntos"},
+  { fecha: "25/12/2025", descripcion: "Pasé navidad con tu familia después de las 12"},
+  { fecha: "1/1/2026", descripcion: "Pasamos el almuerzo de año nuevo juntos"},
+];
+
+function renderCalendario() {
+  const grid = document.querySelector('.calendar-grid');
+  if (!grid) return;
+
+  fechasImportantes.forEach(f => {
+    const item = document.createElement('div');
+    item.className = 'calendar-item';
+    item.innerHTML = `
+      <div class="date">${f.fecha}</div>
+      <div class="description">${f.descripcion}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+// Llamalo al cargar
+renderCalendario();
+
+const slides = document.querySelectorAll('#slideContainer .slide');
+const prevSlideBtn = document.getElementById('prevSlide');
+const nextSlideBtn = document.getElementById('nextSlide');
+const slideCounter = document.getElementById('slideCounter');
+
+let currentSlide = 0;
+
+function showSlide(index) {
+  slides.forEach((s, i) => {
+    s.classList.toggle('active', i === index);
+  });
+  slideCounter.textContent = `${index + 1} / ${slides.length}`;
+}
+
+prevSlideBtn.addEventListener('click', () => {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+});
+
+nextSlideBtn.addEventListener('click', () => {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+});
+
+// Inicializar
+showSlide(currentSlide);
+
+
 }); // end DOMContentLoaded
+
+// Cosas que me gustan de ella
+const likes = [
+  {
+    img: "https://em-content.zobj.net/source/apple/325/eyes_1f440.png",
+    text: "Tus ojos"
+  },
+  {
+    img: "https://em-content.zobj.net/source/apple/237/smiling-face-with-open-mouth-and-smiling-eyes_1f604.png",
+    text: "Tu sonrisa"
+  },
+  {
+    img: "https://i.pinimg.com/564x/f3/6f/89/f36f89ca99814a3025c46a77bd91a158.jpg",
+    text: "Que me contengas"
+  },
+  {
+    img: "https://img.freepik.com/vector-gratis/ilustracion-cumplido-dibujado-mano_23-2150197098.jpg?semt=ais_hybrid&w=740&q=80",
+    text: "Que seas buena"
+  },
+  {
+    img: "https://definicion.de/wp-content/uploads/2011/03/ayuda.jpg",
+    text: "Que seas gentil"
+  },
+  {
+    img: "https://i.pinimg.com/236x/68/9c/85/689c85d176bd558e85f506a16756609d.jpg",
+    text: "Que seas inteligente"
+  },
+  {
+    img: "https://img.freepik.com/vector-premium/risa-encantadora-joven-rie-broma-situacion-graciosa-nina-feliz-sonrie-otra-persona-concepto-comodidad-pasar-buen-rato-ilustracion-vectorial-plana_774778-551.jpg",
+    text: "Que seas graciosa"
+  },
+  {
+    img: "https://st2.depositphotos.com/2305927/9774/v/450/depositphotos_97742182-stock-illustration-cute-couple-laughing-together.jpg",
+    text: "Que tengamos el mismo humor"
+  },
+  {
+    img: "https://ih1.redbubble.net/image.1451373508.8346/pp,504x498-pad,600x600,f8f8f8.jpg",
+    text: "Que tengamos una conexión especial"
+  },
+  {
+    img: "https://images.emojiterra.com/google/android-pie/512px/1f5e3.png",
+    text: "Que nuestras conversaciones fluyan"
+  },
+  {
+    img: "https://coworkingtaluderia.wordpress.com/wp-content/uploads/2016/03/conversation2.jpg?w=640",
+    text: "Que podamos hablar las cosas cada vez que algo no nos gusta"
+  },
+  {
+    img: "https://img.freepik.com/vector-gratis/linda-chica-hacker-operando-laptop-dibujos-animados-vector-icono-ilustracion-personas-tecnologia-aislada-plana_138676-9487.jpg?semt=ais_hybrid&w=740&q=80",
+    text: "Que seas apasionada con lo que amas"
+  },
+  {
+    img: "https://img.freepik.com/foto-gratis/huevo-marron_2829-13453.jpg?semt=ais_hybrid&w=740&q=80",
+    text: "Que tengas los huevos bien puestos"
+  },
+  {
+    img: "https://i.pinimg.com/474x/fc/14/fb/fc14fb3355080278fb2d908b4feaa958.jpg",
+    text: "Que bardees a la gente pelotuda"
+  },
+  {
+    img: "https://media.istockphoto.com/id/1421392775/es/vector/personas-que-hablan-en-el-icono-de-la-mesa.jpg?s=612x612&w=0&k=20&c=luW-vj26nW-ORBsN8iKGiWEGfT54aDDPkYpsrO6624U=",
+    text: "Que opinemos igual en muchos temas"
+  },
+  {
+    img: "https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/1024px/1f5fd.png",
+    text: "Que quieras ir a New York"
+  },
+  {
+    img: "https://img-global.cpcdn.com/recipes/01621e6846ff1262/400x400cq80/photo.jpg",
+    text: "Que te guste el pastel de papa"
+  },
+  {
+    img: "img/aventura.jpg",
+    text: "Que te sepas la letra de ANIMAL de ACRU y WOS"
+  }
+];
+
+function renderLikes() {
+  const grid = document.getElementById("likesGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  likes.forEach(like => {
+    const item = document.createElement("div");
+    item.className = "like-item";
+    item.innerHTML = `
+      <img src="${like.img}" alt="foto relacionada">
+      <div class="like-description">${like.text}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+// Abrir pantalla desde navbar
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const targetId = link.getAttribute("href").replace("#", "");
+    document.querySelectorAll(".pantalla").forEach(sec => {
+      sec.classList.remove("active");
+    });
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.classList.add("active");
+      if (targetId === "cqmgde") renderLikes(); // ✅ renderiza cuando entras a esa pantalla
+    }
+  });
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const targetId = link.getAttribute("href").replace("#", "");
+
+    // Ocultar todas las pantallas
+    document.querySelectorAll(".pantalla").forEach(sec => {
+      sec.classList.remove("active");
+    });
+
+    // Mostrar la pantalla seleccionada
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.classList.add("active");
+
+      // ✅ Guardar en localStorage
+      localStorage.setItem("pantallaActiva", targetId);
+
+      // Renderizar cosas especiales si hace falta
+      if (targetId === "cqmgde") renderLikes();
+    }
+  });
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("pantallaActiva");
+  if (saved) {
+    // Ocultar todas
+    document.querySelectorAll(".pantalla").forEach(sec => {
+      sec.classList.remove("active");
+    });
+    // Mostrar la guardada
+    const target = document.getElementById(saved);
+    if (target) {
+      target.classList.add("active");
+      if (saved === "cqmgde") renderLikes();
+    }
+  }
+});
+
+
+// Abrir modal
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove("hidden");
+    localStorage.setItem("modalActivo", modalId); // ✅ guardar estado
+  }
+}
+
+// Cerrar modal
+document.querySelectorAll(".close").forEach(btn => {
+  btn.addEventListener("click", e => {
+    const targetId = btn.dataset.close;
+    const modal = document.getElementById(targetId);
+    if (modal) {
+      modal.classList.add("hidden");
+      localStorage.removeItem("modalActivo"); // ✅ limpiar estado
+    }
+  });
+});
+
+// ---------- Modal de imagen de galería ----------
+const imageModal = document.getElementById('imageModal');
+const imageModalImg = document.getElementById('imageModalImg');
+const imageCaption = document.getElementById('imageCaption');
+
+// Abrir modal al hacer clic en una foto de la galería
+document.querySelector('.gallery-grid')?.addEventListener('click', (e) => {
+  const img = e.target.closest('img');
+  if (!img) return;
+
+  imageModalImg.src = img.src;
+  imageCaption.textContent = ''; // o podés usar img.alt si querés mostrar algo
+
+  imageModal.classList.remove('hidden');
+});
+
+// Cerrar modal con el botón ✖
+document.querySelector('#imageModal .close')?.addEventListener('click', () => {
+  imageModal.classList.add('hidden');
+});
+
+// Cerrar modal al hacer clic fuera del contenido
+imageModal.addEventListener('click', (e) => {
+  if (e.target === imageModal) {
+    imageModal.classList.add('hidden');
+  }
+});
+
+// Cerrar modal con tecla Esc
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+    imageModal.classList.add('hidden');
+  }
+});
+
+// Variables globales
+document.addEventListener("DOMContentLoaded", () => {
+let pageIndex = 0;
+  const bookPageEl = document.getElementById("bookPage");
+  const pageCounterEl = document.getElementById("pageCounter");
+  const prevPageBtn = document.getElementById("prevPage");
+  const nextPageBtn = document.getElementById("nextPage");
+  const pageJumpInput = document.getElementById("pageJump");
+  const goPageBtn = document.getElementById("goPage");
+
+  function renderPage() {
+    bookPageEl.textContent = bookPages[currentPage];
+    pageCounterEl.textContent = `${currentPage + 1} / ${bookPages.length}`;
+    prevPageBtn.disabled = currentPage === 0;
+    nextPageBtn.disabled = currentPage === bookPages.length - 1;
+  }
+
+  prevPageBtn.addEventListener("click", () => {
+    if (currentPage > 0) {
+      currentPage--;
+      renderPage();
+    }
+  });
+
+  nextPageBtn.addEventListener("click", () => {
+    if (currentPage < bookPages.length - 1) {
+      currentPage++;
+      renderPage();
+    }
+  });
+
+  function goToPage() {
+    const page = parseInt(pageJumpInput.value, 10);
+    if (!isNaN(page) && page >= 1 && page <= bookPages.length) {
+      currentPage = page - 1;
+      renderPage();
+      pageJumpInput.value = "";
+    }
+  }
+
+  goPageBtn.addEventListener("click", goToPage);
+  pageJumpInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") goToPage();
+  });
+ 
+  renderPage();
+});
+
+
+// inicializa
+renderPage();
+
+
+
+nextPageBtn.addEventListener("click", () => {
+  if (currentPage < bookPages.length - 1) {
+    currentPage++;
+    renderPage();
+  }
+});
+
+function goToPage() {
+  const page = parseInt(pageJumpInput.value, 10);
+  if (!isNaN(page) && page >= 1 && page <= bookPages.length) {
+    currentPage = page - 1; // ✅ actualiza la global
+    renderPage();
+    pageJumpInput.value = "";
+  }
+}
+
+goPageBtn.addEventListener("click", goToPage);
+pageJumpInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    goToPage();
+  }
+});
+
+// inicializa
+renderPage();
+
+// Renderiza la página actual
+function renderPage() {
+  bookPageEl.textContent = bookPages[currentPage];
+  pageCounterEl.textContent = `${currentPage + 1} / ${bookPages.length}`;
+}
+
+// Botones prev/next
+prevPageBtn.addEventListener("click", () => {
+  if (currentPage > 0) {
+    currentPage--;
+    renderPage();
+  }
+});
+
+nextPageBtn.addEventListener("click", () => {
+  if (currentPage < bookPages.length - 1) {
+    currentPage++;
+    renderPage();
+  }
+});
+
+// Función para ir a una página específica
+function goToPage() {
+  const page = parseInt(pageJumpInput.value, 10);
+  if (!isNaN(page) && page >= 1 && page <= bookPages.length) {
+    currentPage = page - 1; // índice empieza en 0
+    renderPage();
+    pageJumpInput.value = ""; // opcional: limpiar input
+  }
+}
+
+// Click en botón "Ir"
+goPageBtn.addEventListener("click", goToPage);
+
+// Enter en el input
+pageJumpInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    goToPage();
+  }
+});
+
+// Inicializa la primera página
+renderPage();
+
